@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Menú{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"/>
+  <link rel="stylesheet" href="{{ asset('css/componentes/bootstrap-datatable/css/dataTables.bootstrap4.min.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('css/menu/menu.css') }}"/>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('css/componentes/bootstrap-datatable/js/traduccion.js') }}"></script>
+  <script src="{{ asset('css/componentes/bootstrap-datatable/js/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('css/componentes/bootstrap-datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+  <script src="{{ asset('Script/menu/index.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <div class="panel default-panel">
+      <div class="panel-heading">
+          <h3>Menú</h3>
+      </div>
+      <div class="panel-body table-responsive trans-opacity-0">
+        {% set categoriaActual = null %}
+        {% set categoriaNueva = null %}
+
+        <div style="display: inline-block; width:100%;">
+          <a class="icono text-primary float-left" data-toggle="tooltip" data-placement="top" title="Agregar nuevo" href="{{ path('new_menu') }}"><i class="far fa-plus-square"></i></a>
+          <div class="float-right">
+            <input type="button" class="btn btn-dark" id ="ocultarTodos" value="Reducir">
+            <input type="button" class="btn btn-dark" id ="mostrarTodos" value="Desplegar">
+          </div>
+        </div>
+        <table id="tablaMenu" class="display table table-bordered table-hover">
+        <colgroup>
+          <col span="1" style="width: 40%;">
+          <col span="1" style="width: 40%;">
+          <col span="1" style="width: 10%;">
+          <col span="1" style="width: 10%;">
+        </colgroup>
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Precio</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for elemento in menu  %}
+            {% set categoriaNueva = elemento.id_categoria %}
+            {% if categoriaActual == null %}
+              {% set categoriaActual = elemento.id_categoria %}
+              {% set categoriaNueva = elemento.id_categoria %}
+            {% else %}
+                {% if categoriaActual != categoriaNueva %}
+                  {% set categoriaActual = categoriaNueva %}
+                {% endif %}
+            {% endif %}
+            <tr idCategoria="{{elemento.id_categoria}}" class=" {{elemento.nombre_categoria}}"  style="display:none">
+              <td class="align-middle">{{elemento.nombre_menu}}</td>
+              <td class="align-middle">{{elemento.descripcion}}</td>
+              <td class="align-middle">{{elemento.precio}}</td>
+              <td class="align-middle text-center">
+                <a class="icono text-info" data-toggle="tooltip" data-placement="top" title="Editar" href="{{ path('menu_edit', {'idMenu': elemento.idMenu }) }}"><i class="far fa-edit"></i></a>
+              </td>
+              <td class="p-0 pl-2"> {{elemento.nombre_categoria }} </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}

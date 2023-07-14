@@ -1,0 +1,195 @@
+#opciones {
+  position: sticky;
+  top:0;
+  display: flex;
+  z-index: 2;
+}
+
+.opcion {
+  color: white;
+  height: 40px;
+  border:none;
+  border-radius: 0;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  cursor:pointer;
+  font-weight: bold;
+  background-color: #944E97;
+  text-align: center;
+  margin-left: 5px;
+}
+
+.opcion:hover {
+  color:whitesmoke;
+}
+
+#mesa .btn:first-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: right;
+}
+
+.dropdown-menu {
+  border: solid gray 1px;
+
+}
+
+.scrollable-menu {
+  overflow: auto;
+  max-height: calc(60vh);
+  margin: 3px;
+}
+
+.dropdown-menu-custom .dropdown-item {
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#verPedido {
+}
+
+#mostrarCategorias > a {
+  margin-left: 10px;
+}
+
+#mostrarCategorias a:after {
+  border:none;
+}
+
+.fa-minus-square {
+  cursor: pointer;
+}
+
+table {
+  table-layout: fixed;
+}
+
+td {
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+.modalC {
+  display: none;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top:0;
+  left:0;
+  padding: 5px;
+  background:rgba(0,0,0, 0.5);
+  z-index: 3;
+
+}
+
+#menu {
+  width: 90%;
+  height: 90%;
+  max-height: 90%;
+  background-color: whitesmoke;
+  margin: auto;
+}
+
+.fa-minus-square {
+  font-size: 30px;
+}
+
+.contenedor {
+  margin:20px;
+  border: solid gray 1px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: white;
+  padding: 0px;
+  opacity: 1;
+  transition: opacity 1s;
+  z-index: 1;
+}
+
+.filaPlatillos {
+  min-height: 170px;
+  height: fit-content;
+  margin: 15px;
+  background-color: whitesmoke;
+  border: none;
+}
+
+.columnaPlatillo {
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s;
+  border: solid #944E97 1px;;
+  border-radius: 20px;
+}
+
+.filaCategoria {
+  height: 50px;
+  margin: 15px;
+  justify-content: center;
+  background-color: #17a2b8;
+  font-size: 30px;
+  font-weight: bold;
+  color: whitesmoke;
+}
+
+.row {
+  border-radius: 20px;
+}
+
+.texto {
+  height: 90px;
+  max-height: 90px;
+  min-height: 90px;
+  font-size: 15px;
+  text-align: justify;
+  overflow: hidden;
+  margin-top: 5px;
+  border-top: dashed #54332A 2px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  font-size: 20px;
+}
+
+.nombre {
+  height: 60px;
+  max-height: 60px;
+  min-height: 60px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #944E97;
+  text-align: justify;
+  overflow: hidden;
+}
+
+.precio:before {
+  content: '';
+  flex: 1;
+  margin-top: 20px;
+  margin-right: 5px;
+  border-top: dotted gray 3px;
+}
+.precio {
+  display: flex;
+  text-align:center;
+  float:right;
+  align-self: flex-end;
+  font-weight: bold;
+  font-size: 20px;
+  overflow: hidden;
+  width: 100%
+}
+
+.cantidadTabla {
+  text-align: center;
+  padding: 5px;
+  width: 100%;
+}
+
+.nombreTabla {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

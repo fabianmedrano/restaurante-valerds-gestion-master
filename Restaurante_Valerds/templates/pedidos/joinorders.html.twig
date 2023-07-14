@@ -1,0 +1,146 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"/>
+  <link rel="stylesheet" href="{{ asset('css/componentes/bootstrap-datatable/css/dataTables.bootstrap4.min.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('css/pedido/pedido.css') }}"/>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+{% endblock %}
+
+{% block title %}Pedidos{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('css/componentes/bootstrap-datatable/js/traduccion.js') }}"></script>
+  <script src="{{ asset('css/componentes/bootstrap-datatable/js/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('css/componentes/bootstrap-datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+
+  <script src="{{ asset('Script/pedidos/joinorder.js') }}"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+{% endblock %}
+
+{% block body %}
+<input type="hidden" id="guardarunionURL" value="{{ path('guardar_union') }}">
+  <div class="container mt-1 mb-1">
+    <div class="panel panel-default border rounded p-1">
+      <div class="panel-heading">
+        <h3>Union pedidos</h3>
+      </div>
+      <div class="panel-body" style=" min-height: 200px;">
+
+        <div class="row"></div>
+        <br/>
+
+        <div class="row">
+          <div class="col-lg-6" style="float:left;">
+            <a class="icono text-primary" data-toggle="tooltip" data-placement="top" id="btn-mover-a-derecha" style=" float: left;">
+              <i class="far fa-caret-square-right"></i>
+            </a>
+
+            <!-- INICIO PRIMER PANEL DE TABLA -->
+            <div class="panel" style=" min-height: 280px;">
+              <table class="table table-bordered table-hover " id="pedido">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Menu</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody id="tabla-pedido-izquierda">
+                  {% for pedido1 in pedidos1 %}
+                    <tr id="{{ pedido1.idMenu }}">
+                      <td class="align-middle">{{ pedido1.nombre }}</td>
+                      <td class="cantidad">{{ pedido1.cantidad }}</td>
+                      <td class="align-middle">₡
+                        {{ pedido1.precio }}</td>
+
+                      <td style="display: none;" class="idMenu">{{ pedido1.idMenu }}</td>
+                      <!-- <td style="display: none;">{ pedido1.idPedido }}</td>-->
+                      <td>
+                        <label class="custom-control material-checkbox">
+                          <input type="checkbox" class="material-control-input">
+                          <span class="material-control-indicator"></span>
+                        </label>
+                      </td>
+
+                    </tr>
+                  {% endfor %}
+
+                </tbody>
+              </table>
+            </div>
+            <!-- FIN PRIMER PANEL DE TABLA -->
+          </div>
+
+          <div class="col-lg-6" style="float:rigth">
+
+            <a class="icono text-primary " data-toggle="tooltip" data-placement="top" id="btn-mover-a-izquierda" style=" float: right;">
+              <i class="far fa-caret-square-left"></i>
+            </a>
+            <!-- INICIO SEGUNDO PANEL DE TABLA -->
+            <div class="panel" style=" min-height: 200px;">
+              <table class="table table-bordered table-hover ">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Menu</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody id="tabla-pedido-derecha" style="overflow-y: scroll; ">
+
+                  {% for pedido2 in pedidos2 %}
+                    <tr id="{{ pedido2.idMenu }}">
+                      <td class="align-middle">{{ pedido2.nombre }}</td>
+                      <td class="cantidad">{{ pedido2.cantidad }}</td>
+                      <td class="align-middle">₡
+                        {{ pedido2.precio }}</td>
+
+                      <td style="display: none;" class="idMenu">{{ pedido2.idMenu }}</td>
+                      <!-- <td style="display: none;">{ pedido2.idPedido }}</td>-->
+                      <td>
+                        <label class="custom-control material-checkbox">
+                          <input type="checkbox" class="material-control-input">
+                          <span class="material-control-indicator"></span>
+                        </label>
+                      </td>
+
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <!-- FIN SEGUNDO PANEL DE TABLA -->
+
+
+          </div>
+
+        </div>
+        <!-- INICIO PANEL OPCIONES -->
+        <div class="panel" style=" height: 45px;">
+          <button type="button" style=" float: left;  margin-bottom: 50px;" class="btn btn-primary " id="btn-guardar">
+            Guardar
+          </button>
+
+          <button type="button" style=" float: right;  margin-bottom: 50px;" class="btn btn-primary "
+           id="btn-regresar-pedidos"  onclick=" location.href='{{ path('pedidos_tableorders_show', {'mesa': mesa }) }}'">
+            Regresar a pedidos
+          </button>
+
+        </div>
+        <!-- FIN PANEL OPCIONES -->
+
+      </div>
+    </div>
+  </div>
+  <!-- <input type="text" id="mesa" style="display:none" value="">-->
+  <input type="text" id="idPedido1" style="display:none" value="{{pedido1}}">
+  <input type="text" id="idPedido2" style="display:none" value="{{pedido2}}">
+
+{% endblock %}

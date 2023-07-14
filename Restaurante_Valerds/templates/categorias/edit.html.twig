@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edición{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('Script/categorias/categorias.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+  <div class="container mt-1 mb-1">
+    <div class="panel panel-default border w-fit-content-min m-auto">
+        <div class="panel-heading">
+          <h3>Edición de categoría</h3>
+        </div>
+        <div class="panel-body">
+          {{ include('categorias/_form.html.twig', {'modo': 'Actualizar'}) }}
+          <a class="btn btn-primary" href="{{ path('categorias_index') }}">Regresar</a>
+          {{ form_end(form) }}
+        </div>
+    </div>
+  </div>
+{% endblock %}

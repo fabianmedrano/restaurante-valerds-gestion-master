@@ -1,0 +1,15 @@
+{% block stylesheets %}
+  <link href="{{ asset('css/validaciones.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+  <script src="{{ asset('Script/validaciones.js') }}"></script>
+{% endblock %}
+
+{{ form_start(form, { 'attr' : {'id': 'formulario' }})}}
+    <div class="form-group">
+      <label class="font-weight-bold">Nombre</label>
+      {{form_widget(form.nombre, { 'attr': {'valLetrasAcentosNumerosEspacioPuntuacionesSimbolos': 'true', 'requerido': 'true', 'class': 'control form-control', 'placeholder': 'Ingrese el nombre'} })}}
+      <div class="div-error"></div>
+    </div>
+    <button id="enviar" type="button" class="btn btn-primary">{{modo|default('Registrar')}}</button>

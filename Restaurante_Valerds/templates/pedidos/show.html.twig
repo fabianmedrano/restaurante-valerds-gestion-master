@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"/>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('css/componentes/bootstrap-datatable/js/traduccion.js') }}"></script>
+  <script src="{{ asset('css/componentes/bootstrap-datatable/js/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('css/componentes/bootstrap-datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+  <script src="{{ asset('Script/pedidos/pedidos.js') }}"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <div class="panel panel-default border rounded p-1">
+      <div class="panel-heading">
+        <h3>Detalle</h3>
+      </div>
+
+      
+      <div class="panel-body table-responsive">
+        <div class="float-right">
+          <a class="icono text-info" data-toggle="tooltip" data-placement="top" title="Editar" href="{{ path('pedidos_edit', {'idPedido': pedido }) }}">
+            <i class="far fa-edit"></i>
+          </a>
+          <a class="icono text-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"
+          href="javascript:eliminar('{{ path('pedidos_delete', {'pedido': pedido, 'mesa':mesa }) }}');">
+          
+            <i class="far fa-trash-alt"></i>
+          </a>
+        </div>
+       <div>
+          <div class="form-group row" style="‎width: 150px; margin-left: 10px; margin-right: 15px;">
+              <label for="nombre-cliente" class="col-sm-1 col-form-label">Cliente : </label>
+              <div class="col-ls-10">
+                <input type="text" class="form-control" id="nombre-cliente" placeholder="Cliente">
+              </div>
+          </div>
+        </div>
+      
+  
+        <table class="table table-bordered table-hover" id="tablaPedidosShow">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Menu</th>
+              <th scope="col">Descripcion</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Precio</th>
+            </tr>
+          </thead>
+          <tbody >
+            {% for pedido in pedidos %}
+              <tr>
+                <td class="align-middle">{{ pedido.nombre }}</td>
+                <td class="align-middle">{{ pedido.descripcion }}</td>
+                <td class="align-middle">{{ pedido.cantidad }}</td>
+                <td class="align-middle">{{ pedido.precio }}</td>
+              </tr>
+            {% endfor %}
+            <tr style=" background-color: #e7e8ec;">
+              <td scope="col" class="table-hover" colspan="3">
+                <h6>Total:</h6>
+              </td>
+              <td class="table-secondary" id="tablaPedidosTotal">
+                {{ total}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <a class="btn btn-primary float-left" href="{{ path('pedidos_tableorders_show', {'pedido': pedido, 'mesa': mesa}) }}">Regresar a pedidos</a>
+        <button type="button" style=" float: right;" id="btn-facturar" class="btn btn-primary">Facturar</button>
+      </div>
+
+    </div>
+  </div>
+
+  <input type="text" id="idPedido" style="display:none" value="{{pedido}}">
+  <input type="text" id="mesa" style="display:none" value="{{mesa}}">
+
+  <script>
+    $(function() {
+      $('#tablaPedidosTotal').html("₡ " + $('#tablaPedidosTotal').html().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"));
+      $('#tablaPedidosShow tbody').children('tr').each(function() {
+        $(this).find('td:eq(3)').html("₡ " + $(this).find('td:eq(3)').html().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"));
+      });
+    });
+  </script>
+{% endblock %}

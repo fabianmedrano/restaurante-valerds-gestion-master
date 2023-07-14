@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"/>
+<link rel="stylesheet" href="{{ asset('css/componentes/bootstrap-datatable/css/dataTables.bootstrap4.min.css') }}"/>
+{% endblock %}
+
+{% block title %}Factura{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('css/componentes/bootstrap-datatable/js/traduccion.js') }}"></script>
+<script src="{{ asset('css/componentes/bootstrap-datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('css/componentes/bootstrap-datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('Script/factura/facturas.js') }}"></script>
+<script src="{{ asset('Script/factura/indexDetalle.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+<input type="hidden" id="URLFacturaDetalle" value="{{ path('factura_detalle') }}">
+<div class="container mt-1 mb-1">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3>Facturas</h3>
+    </div>
+    <div class="panel-body table-responsive trans-opacity-0">
+      <table id="tablaFactura" class="table table-bordered table-hover">
+        <colgroup>
+          <col span="1" style="width: 5%;">
+          <col span="1" style="width: 18%;">
+          <col span="1" style="width: 18%;">
+          <col span="1" style="width: 18%;">
+          <col span="1" style="width: 18%;">
+          <col span="1" style="width: 18%;">
+          <col span="1" style="width: 5%;">
+        </colgroup>
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Nº</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Pedido</th>
+            <th scope="col">Cajero</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Monto</th>
+            <th scope="col">Detalle</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for  key,factura in  facturas%}
+          <tr idfactura="{{factura.id_factura}}">
+            <td class="align-middle">{{ factura.id_factura }}</td>
+            <td class="align-middle">{{ factura.fecha|date("m/d/Y") }} </td>
+            <td class="align-middle">{{ factura.id_pedido }}</td>
+            <td class="align-middle">{{ factura.cajero }}</td>
+            <td class="align-middle">{{ factura.nombre }}</td>
+            <td class="align-middle">₡{{ arrayTotalFactura[key][0].total|number_format(2, '.', ',')}}
+            </td>
+            <td class="align-middle text-center detalle">
+              <a class="icono text-info" data-target="#myModal" data-toggle="modal" data-placement="top" href="#" title="Visualizar detalle">
+                <i class="far fa-file-alt"></i>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+</div>
+{% endblock %}

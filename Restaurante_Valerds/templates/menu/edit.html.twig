@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edición{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link href="{{ asset('css/componentes/switch.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('Script/menu/edit.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+  <div class="container mt-1 mb-1">
+    <div class="panel panel-default border w-fit-content-min m-auto">
+      <div class="panel-heading">
+         <h3>Edición de platillo</h3>
+      </div>
+      <br>
+      <div class="panel-body">
+      {{ form_start(form, { 'attr' : {'id': 'formulario' }})}}
+        {{ include('menu/_form.html.twig', {'modo': 'Actualizar'}) }}
+        <a class="btn btn-primary" href="{{ path('menu_index') }}">Regresar</a>
+        {{ form_end(form) }}
+      </div>
+    </div>
+    </div>
+  </div>
+{% endblock %}

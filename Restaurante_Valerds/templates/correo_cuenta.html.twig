@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <div class="panel panel-default border p-5 mx-auto" style="width:fit-content;">
+      <div class="panel-heading text-center mb-5">
+        <h3>Estos son los datos de tu cuenta</h3>
+      </div>
+      <div class="panel-body ">
+          <h5>Usuario: {{usuario}} </h5>
+          <h5>Contraseña: {{contrasena}}</h5>
+      </div>
+    </div>
+  </div>
+{% endblock %}

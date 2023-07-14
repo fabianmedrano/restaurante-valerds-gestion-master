@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"/>
+  <link rel="stylesheet" href="{{ asset('css/componentes/bootstrap-datatable/css/dataTables.bootstrap4.min.css') }}"/>
+  <link href="{{ asset('css/validaciones.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block title %}Inventario{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('Script/inventario/index.js') }}"></script>
+  <script src="{{ asset('css/componentes/bootstrap-datatable/js/traduccion.js') }}"></script>
+  <script src="{{ asset('css/componentes/bootstrap-datatable/js/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('css/componentes/bootstrap-datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+  <script src="{{ asset('Script/validaciones.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+  <input type="hidden" id="actualizarStockURL" value="{{ path('inventario_actualizar_stock') }}">
+
+  <div class="container">
+    <div class="panel panel-default border">
+      <div class="panel-heading">
+        <h3>Inventario</h3>
+      </div>
+      <div class="panel-body table-responsive trans-opacity-0">
+        <a class="icono text-primary" data-toggle="tooltip" data-placement="top" title="Agregar" href="{{ path('inventario_new') }}">
+          <i class="far fa-plus-square"></i>
+        </a>
+        <table id="tablaInventario" class="table table-bordered table-hover">
+          <colgroup>
+            <col span="1" style="width: 42.5%;">
+            <col span="1" style="width: 42.5%;">
+            <col span="1" style="width: 5%;">
+            <col span="1" style="width: 5%;">
+            {% if is_granted('ROLE_ADMIN') %}
+              <col span="1" style="width: 5%;">
+            {% endif %}
+          </colgroup>
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Descripción</th>
+              <td scope="col" class="texto-verde font-weight-bold align-middle">Stock</td>
+              <th scope="col"></th>
+              {% if is_granted('ROLE_ADMIN') %}
+                <th scope="col"></th>
+              {% endif %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for inventario in inventarios %}
+              <tr idarticulo="{{inventario.idArticulo}}" nombre="{{app.session.get('nombre')}}">
+                <td class="align-middle">{{ inventario.nombre }}</td>
+                <td class="align-middle">{{ inventario.descripcion }}</td>
+                <td class="align-middle pointer stock" data-order="{{ inventario.stock }}" data-toggle="tooltip" data-placement="top" title="Modificar Stock">{{ inventario.stock }}</td>
+                <td class="align-middle text-center">
+                  <a class="icono text-info" data-toggle="tooltip" data-placement="top" title="Editar" href="{{ path('inventario_edit', {'idArticulo': inventario.idArticulo}) }}">
+                    <i class="far fa-edit"></i>
+                  </a>
+                </td>
+                {% if is_granted('ROLE_ADMIN') %}
+                  <td class="align-middle text-center">
+                    <a id="eliminar" class="icono text-danger pointer" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                      <i class="far fa-trash-alt"></i>
+                    </a>
+                    <form method="post" action="{{ path('inventario_delete', {'idArticulo': inventario.idArticulo}) }}">
+                      <input type="hidden" name="_method" value="DELETE">
+                      <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ inventario.idArticulo) }}">
+                    </form>
+                  </td>
+                {% endif %}
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}

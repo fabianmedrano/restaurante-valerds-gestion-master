@@ -1,0 +1,10 @@
+#index:
+#    path: /
+#    controller: App\Controller\InicioSesionController::index
+
+principal:
+    path: /principal
+    controller: App\Controller\PrincipalController::index
+
+logout:
+    path: /logout

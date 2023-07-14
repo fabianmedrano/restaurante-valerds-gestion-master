@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registro{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link href="{{ asset('css/componentes/switch.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('Script/usuarios/general.js') }}"></script>
+  <script src="{{ asset('Script/usuarios/new.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+  <div class="container mt-1 mb-1">
+    <div class="panel panel-default border w-fit-content-min m-auto">
+        <div class="panel-heading">
+          <h3>Registro de usuario</h3>
+        </div>
+        <div class="panel-body">
+          {{ include('usuarios/_form.html.twig') }}
+          <a class="btn btn-primary" href="{{ path('usuarios_index') }}">Regresar</a>
+          {{ form_end(form) }}
+        </div>
+    </div>
+  </div>
+{% endblock %}

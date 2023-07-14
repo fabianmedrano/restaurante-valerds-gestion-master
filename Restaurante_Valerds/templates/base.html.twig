@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <link rel="shortcut icon" href="{{ asset('imagenes/logo.png') }}">
+    <title>
+      {% block title %}{% endblock %}
+    </title>
+
+    <stylesheets>
+      {% block stylesheets %}
+        <link href="{{ asset('css/bootstrap-4.2.1-dist/css/bootstrap.min.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('css/general.css') }}" rel="stylesheet"/>
+      {% endblock %}
+    </stylesheets>
+
+    {% block head %}{% endblock %}
+  </head>
+
+  <body>
+    <javascripts>
+      {% block javascripts %}
+        <script src="{{ asset('Script/jquery/jquery-3.3.1.min.js') }}"></script>
+        <script src="{{ asset('css/bootstrap-4.2.1-dist/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('Script/sweetalert/sweetalert2.all.min.js') }}"></script>
+        <script src="{{ asset('Script/sweetalert/sweetalert.min.js') }}"></script>
+      {% endblock %}
+    </javascripts>
+
+    <header>
+      {% block header %}
+        {{ include('navegacion.html.twig') }}
+      {% endblock %}
+    </header>
+
+    {% block body %}{% endblock %}
+
+    <footer>
+      {% block footer %}
+        <div class="f-general">
+          <div class="">
+            <p class="font-weight-bold">Creadores</p>
+          </div>
+          <div class="ml-3">
+            <p>Álvaro Montero Castillo</p>
+            <p>Fabián Medrano Rodríguez</p>
+            <p>Kalet Myrie Soto</p>
+            <p>Karol Chacón Vargas</p>
+          </div>
+        </div>
+        <div class="f-info">
+          <div class="col-lg-12 copyright">
+            <p>Copyright © 2019 · Universidad de Costa Rica</p>
+          </div>
+        </div>
+      {% endblock %}
+    </footer>
+  </body>
+
+  {% for flash_message in app.session.flashbag.get('alertaError') %}
+    <script>
+      Swal.fire({
+        toast: true,
+        type: 'error',
+        title: "{{ flash_message }}",
+        position: 'bottom-start',
+        showConfirmButton: false,
+        timer: 5000
+      });
+    </script>
+  {% endfor %}
+  {% for flash_message in app.session.flashbag.get('alertaCompletado') %}
+    <script>
+      Swal.fire({
+        toast: true,
+        type: 'success',
+        title: "{{ flash_message }}",
+        position: 'bottom-start',
+        showConfirmButton: false,
+        timer: 5000
+      });
+    </script>
+  {% endfor %}
+  {% for flash_message in app.session.flashbag.get('mensaje') %}
+    <script>
+      Swal.fire({
+        toast: true,
+        type: 'info',
+        title: "{{ flash_message }}",
+        position: 'bottom-start',
+        showConfirmButton: false,
+        timer: 5000
+      });
+    </script>
+  {% endfor %}
+</html>

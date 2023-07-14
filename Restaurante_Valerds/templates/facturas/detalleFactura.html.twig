@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"/>
+<link rel="stylesheet" href="{{ asset('css/componentes/bootstrap-datatable/css/dataTables.bootstrap4.min.css') }}"/>
+{% endblock %}
+
+{% block title %}Detalle de factura{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('css/componentes/bootstrap-datatable/js/traduccion.js') }}"></script>
+<script src="{{ asset('css/componentes/bootstrap-datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('css/componentes/bootstrap-datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('Script/pedidos/pedidos.js') }}"></script>
+<script src="{{ asset('Script/factura/facturas.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+ <div class="panel panel-default border">
+  <div class="panel-heading">
+    <h3>Detalle factura {{facturas[0].id_factura}}</h3>
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive trans-opacity-0">
+    <h5>Facturado por {{facturas[0].nombreCajero}}</h5>
+    <h5>Facturado a nombre de {{facturas[0].nombreCliente}}</h5>
+      <table id="tablaDetalleFactura" class="table table-bordered table-hover">
+        <thead class="thead-light">
+          <tr>
+           <th scope="col">Platillo</th>
+           <th scope="col">Categoría</th>
+           <th scope="col">Precio</th>
+           <th scope="col">Cantidad</th>
+         </tr>
+       </thead>
+       <tbody>
+        {% for facturas in  facturas %}
+        <tr>
+          <td class="align-middle">{{ facturas.nombre }}</td>
+          <td class="align-middle">{{ facturas.categorias }}</td>
+          <td class="align-middle">{{ facturas.precio }}</td>
+          <td class="align-middle">{{ facturas.cantidad }}</td>
+        </tr>
+        {% endfor %}
+
+
+      </tbody>
+    </table>
+      <div style="
+        width:100%;
+        border:solid gray 1px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
+
+      "
+      >
+        <p style="
+        align-self: flex-end;
+        margin-top:0;
+        margin-bottom: 0;
+        font-weight: bold;
+        ">Total: ₡ </p>
+      </div>
+
+{#
+        <tr style=" background-color: #e7e8ec;">
+          <td  scope="col" class="table-hover" COLSPAN="6"><h6>Total:</h6>
+          </td>
+          <td class="table-secondary">₡ </td>
+        </tr>  #}
+  </div>
+</div>
+</div>
+</div>
+{% endblock %}

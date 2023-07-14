@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"/>
+  <link rel="stylesheet" href="{{ asset('css/componentes/bootstrap-datatable/css/dataTables.bootstrap4.min.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('css/pedido/joinorder.css') }}"/>
+  
+  <link rel="stylesheet" href="{{ asset('css/validaciones.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('css/validaciones.css') }}"/>
+{% endblock %}
+
+{% block title %}Pedidos{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('css/componentes/bootstrap-datatable/js/traduccion.js') }}"></script>
+  <script src="{{ asset('css/componentes/bootstrap-datatable/js/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('css/componentes/bootstrap-datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+  <script src="{{ asset('Script/pedidos/pedidos.js') }}"></script>
+  <script src="{{ asset('Script/pedidos/joinorder.js') }}"></script>
+  <script src="{{ asset('Script/validaciones.js') }}"></script>
+
+{% endblock %}
+
+{% block body %} 
+  <div class="container">
+  
+<input type="hidden" id="unirtodoURL" value="{{ path('unirtodo') }}">
+
+
+
+    <div class="panel panel-default border">
+      <div class="panel-heading">
+        <h3>Pedidos pendientes de la mesa
+          {{mesa}}</h3>
+      </div>
+      <div class="panel-body table-responsive">
+        <table class="table table-bordered table-hover" id="tablaPedidos">
+          <colgroup>
+            <col span="1" style="width: 47.5%;">
+            <col span="1" style="width: 47.5%;">
+            <col span="1" style="width: 5%;">
+          </colgroup>
+          <thead class="thead-light">
+            <tr>
+              <th>Cantidad de platillos</th>
+              <th>Total</th>
+              <th>Detalle</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for pedido in pedidos %}
+              <tr id="{{ pedido.idPedido }}">
+                <td class="align-middle">{{ pedido.menu }}</td>
+                <td class="align-middle">{{ pedido.total }}</td>
+                <td class="align-middle text-center">
+                  <a class="icono text-info" data-toggle="tooltip" data-placement="top" title="Detalle del pedido" href="{{ path('pedidos_show', { 'mesa':mesa,'pedido': pedido.idPedido}) }}">
+                    <i class="far fa-file-alt"></i>
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <a class="btn btn-primary" href="{{ path('mesa_index') }}">Regresar a mesas</a>
+      <button class="btn btn-primary  float-right" id="btn-unir">Unir pedidos</button>
+      <button class="btn btn-danger float-right" style="display:none" id="btn-cancelar" disabled="true">Cancelar</button>
+      <button class="btn btn-primary  float-right" style="display:none" id="btn-continuar" disabled="true">Continuar</button>
+    </div>
+
+    <input type="text" id="mesa" style="display:none" value="{{mesa}}">
+  </div>
+  <script>
+    $(function() {
+      $('#tablaPedidos tbody').children('tr').each(function() {
+        $(this).find('td:eq(1)').html("₡ " + $(this).find('td:eq(1)').html().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"));
+      });
+    });
+  </script>
+{% endblock %}

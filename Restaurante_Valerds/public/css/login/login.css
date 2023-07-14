@@ -1,0 +1,15 @@
+#contrasena {
+  padding-right: 43.92px;
+  border-radius: 4px;
+  z-index: 4;
+}
+
+.cont-agregado span {
+  width: 43.92px;
+  height: calc(100%);
+  position: absolute;
+  border:none;
+  background: transparent;
+  margin-left: -42.92px;
+  z-index: 5;
+}

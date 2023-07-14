@@ -1,0 +1,82 @@
+{% block stylesheets %}
+  <link href="{{ asset('css/validaciones.css') }}" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"/>
+{% endblock %}
+
+{% block javascripts %}
+  <script src="{{ asset('Script/validaciones.js') }}"></script>
+{% endblock %}
+
+{{ form_start(form, { 'attr' : {'id': 'formulario' }})}}
+  {% if edicion is not defined %}
+    {% do form.estado.setRendered %}
+  {% endif %}
+  <div class="form-group">
+    <label class="font-weight-bold">Nombre</label>
+    {{form_widget(form.nombre, { 'attr': {'valLetras': 'true', 'requerido': 'true', 'class': 'control form-control', 'placeholder': 'Ingrese el nombre'} })}}
+    <div class="div-error"></div>
+  </div>
+  <div class="form-group">
+    <label class="font-weight-bold">Usuario</label>
+    {{form_widget(form.usuario, { 'attr': {'valLetrasNumeros': 'true', 'requerido': 'true', 'class': 'control form-control', 'placeholder': 'Ingrese el usuario'} })}}
+    <div class="div-error"></div>
+  </div>
+  <div class="form-group">
+    <label class="font-weight-bold">Contraseña</label>
+    <div class="input-group">
+      {{form_widget(form.contrasena, { 'attr': {'requerido': 'true', 'valLetrasAcentosNumerosPuntuacionesSimbolos': 'true', 'class': 'control form-control', 'placeholder': 'Ingrese la contraseña'}, 'type': 'password' })}}
+      <div class="input-group-append cont-agregado">
+          <span class="input-group-text" id="visibilidad"><i id="ojo" class="fas fa-eye-slash"></i></span>
+      </div>
+    </div>
+    <div class="div-error"></div>
+  </div>
+  <div class="form-group">
+    <label class="font-weight-bold">Correo electrónico</label>
+    {{form_widget(form.correo, { 'type': 'email', 'attr': {'valCorreo': 'true', 'requerido': 'true', 'class': 'control form-control asignarValidarCorreo', 'placeholder': 'Ingrese el correo electrónico'} })}}
+    <div class="div-error"></div>
+  </div>
+  {% if edicion is defined and admin == false %}
+    <div class="form-group" style="display: flex; flex-direction: column;">
+     <label class="font-weight-bold">Estado</label>
+     <div style="display:flex; align-items:center;">
+       <span>Inactivo</span>
+       <label class="switch">
+         {{form_widget(form.estado, { 'type': 'checkbox'})}}
+         <span class="slider round"></span>
+       </label>
+       <span>Activo</span>
+     </div>
+   </div>
+  {% else %}
+    {% do form.estado.setRendered %}
+  {% endif %}
+  {% if form.permisosUsuario | length > 0 %}
+      <fieldset class="form-group">
+        <legend class="col-form-label w-auto font-weight-bold">Permisos</legend>
+        <div class="row">
+          {% for permiso in form.permisosUsuario %}
+            <div class="col-auto">
+              <div class="form-check">
+                <label class="form-check-label font-weight-bold" for="gridRadios1">
+                  {{ permiso.nombre.vars.value }}
+                </label>
+                <div style="display:flex; align-items:center;">
+                  <span>Inactivo</span>
+                  <label class="switch">
+                    {{form_widget(permiso.estado, { 'type': 'checkbox'})}}
+                    <span class="slider round"></span>
+                  </label>
+                  <span>Activo</span>
+                </div>
+              </div>
+            </div>
+          {{form_widget(permiso.nombre)}}
+          {{form_widget(permiso.idPermiso)}}
+          {% endfor %}
+        </div>
+      </fieldset>
+  {% else  %}
+    {% do form.permisosUsuario.setRendered %}
+  {% endif %}
+    <button id="enviar" type="button" class="btn btn-primary">{{modo|default('Registrar')}}</button>

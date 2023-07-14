@@ -1,0 +1,80 @@
+{% block stylesheets %}
+  <link href="{{ asset('css/navegacion.css') }}" rel="stylesheet"/>
+  <link href="{{ asset('css/validaciones.css') }}" rel="stylesheet"/>
+{% endblock %}
+{% block javascripts %}
+  <script src="{{ asset('Script/validaciones.js') }}"></script>
+  <script src="{{ asset('Script/mesas/mesas.js') }}"></script>
+  <script src="{{ asset('Script/reportes/reportes.js') }}"></script>
+  <script src="{{ asset('Script/validaciones.js') }}"></script>
+{% endblock %}
+
+<input type="hidden" id="obtenerMesasURL" value="{{ path('obtener_mesas') }}">
+<input type="hidden" id="modificarMesasURL" value="{{ path('modificar_mesas') }}">
+<input type="hidden" id="FiltroReporte" value="{{ path('repoInventario') }}">
+<input type="hidden" id="FiltroReportePlatillos" value="{{ path('reportePlatillos') }}">
+<input type="hidden" id="FiltroReporteProductos" value="{{ path('reporteProductos') }}">
+
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <a class="navbar-brand" href="{{path('principal_index')}}" style"margin:0; padding:0;"="style" margin:0;="margin:0;" padding:0;""="padding:0;" ""><img src="{{ asset('imagenes/logo.png') }}" width="40" height="40">Valverd's</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav mr-auto">
+      {% if is_granted('ROLE_MESERO') %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('mesero_index') }}">Mesero<span class="sr-only">(current)</span></a>
+        </li>
+      {% endif %}
+      {% if is_granted('ROLE_CAJERO') %}
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('mesa_index') }}">Cajero</a>
+        </li>
+      {% endif %}
+      {% if is_granted('ROLE_INVENTARIO')or is_granted('ROLE_ADMIN') %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('inventario_index') }}">Inventario</a>
+        </li>
+      {% endif %}
+      {% if is_granted('ROLE_ADMIN') %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Administración
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="{{ path('categorias_index') }}">Categorías</a>
+            <a class="dropdown-item" href="{{ path('menu_index') }}">Menú</a>
+            <a class="dropdown-item" href="{{ path('facturas_index') }}">Facturas</a>
+            <a class="dropdown-item" href="{{ path('usuarios_index') }}">Usuarios</a>
+            <a class="dropdown-item" href="#" id="modificarMesas">Mesas</a>
+
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Reportes
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#" id="FiltroReporte">Inventario</a>
+            <a class="dropdown-item" href="#" id="FiltroReportePlatillos" >Platillos</a>
+            <a class="dropdown-item" href="#" id="FiltroReporteProductos">Productos</a>
+
+          </div>
+        </li>
+      {% endif %}
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          {{app.session.get('nombre')}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="right:0; left:auto;">
+          <a class="dropdown-item" href="{{ path('logout') }}">Cerrar sesión</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

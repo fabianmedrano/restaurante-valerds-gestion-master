@@ -1,0 +1,68 @@
+
+{% block head %}
+<img width="200" height="200" src="https://scontent.fsyq1-1.fna.fbcdn.net/v/t1.0-9/13325608_1028285280586217_6030893012588052251_n.png?_nc_cat=100&_nc_ht=scontent.fsyq1-1.fna&oh=9428a4c70e729b5f82fea12fb60f87fa&oe=5CB7D66F"/>
+<p style="text-align:right; font-size:150%;"> <b>Fecha:{{fecha}} </b> </p>
+{% endblock %}
+
+
+
+<h1 style="text-align:center;">Reporte de inventario</h1> 
+<br>
+<br>
+
+{% block body %}
+
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+  background-color: #123456;
+  color: white;
+}
+</style>
+
+<table>        
+    <thead>
+        <tr style="font-size:200%;">                
+            <th>Nombre Usuario </th>
+            <th>Producto</th>
+            <th>Stock Anterior</th>
+            <th>Stock Actual</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    {% for movInventario in movInventarios %}                
+        <tr >
+            <td style="font-size:150%;">
+                {{ movInventario.nombreUsuario }}
+            </td>                  
+            <td style="font-size:150%;">
+                {{ movInventario.producto }}
+            </td >
+
+            <td style="font-size:150%;">
+                {{ movInventario.stockAnterior }}
+            </td>
+
+            <td style="font-size:150%;">
+                {{ movInventario.stockActual }}
+            </td>
+
+            <td style="font-size:150%;">
+                {{ movInventario.fecha }}
+            </td>
+
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inventario{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('Script/inventario/inventario.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <h1>Inventario</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdArticulo</th>
+                <td>{{ inventario.idArticulo }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ inventario.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ inventario.descripcion }}</td>
+            </tr>
+            <tr>
+                <th>Stock</th>
+                <td>{{ inventario.stock }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('inventario_index') }}">back to list</a>
+
+    <a href="{{ path('inventario_edit', {'idArticulo': inventario.idArticulo}) }}">edit</a>
+
+    {{ include('inventario/_delete_form.html.twig') }}
+{% endblock %}

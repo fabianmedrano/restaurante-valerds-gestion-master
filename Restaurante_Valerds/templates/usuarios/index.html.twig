@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"/>
+  <link rel="stylesheet" href="{{ asset('css/componentes/bootstrap-datatable/css/dataTables.bootstrap4.min.css') }}"/>
+{% endblock %}
+
+{% block title %}Usuarios{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('css/componentes/bootstrap-datatable/js/traduccion.js') }}"></script>
+  <script src="{{ asset('css/componentes/bootstrap-datatable/js/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('css/componentes/bootstrap-datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+  <script src="{{ asset('Script/usuarios/index.js') }}"></script>
+  <script src="{{ asset('Script/validaciones.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+<div class="container mt-1 mb-1">
+     <div class="panel panel-default border">
+        <div class="panel-heading">
+          <h3>Usuarios</h3>
+        </div>
+        <div class="panel-body table-responsive trans-opacity-0">
+          <a class="icono text-primary" data-toggle="tooltip" data-placement="top" title="Agregar" href="{{ path('usuarios_new') }}"><i class="far fa-plus-square"></i></a>
+          <table id="tablaUsuarios" class="table table-bordered table-hover">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Contraseña</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Correo electrónico</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for usuario in usuarios %}
+                <tr>
+                  <td class="align-middle"> {{ usuario.nombre }}</td>
+                  <td class="align-middle">{{ usuario.usuario }}</td>
+                  <td class="align-middle">{{ usuario.contrasena }}</td>
+                  <td class="align-middle">{{ usuario.estado ? 'Activo' : 'Inactivo' }}</td>
+                  <td class="align-middle">{{ usuario.correo }}</td>
+                  <td class="align-middle text-center">
+                    <a class="icono text-info" data-toggle="tooltip" data-placement="top" title="Editar" href="{{ path('usuarios_edit', {'idUsuario': usuario.idUsuario}) }}"><i class="far fa-edit"></i></a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+      </div>
+  </div>
+</div>
+{% endblock %}

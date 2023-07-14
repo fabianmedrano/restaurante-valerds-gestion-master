@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"/>
+<link rel="stylesheet" href="{{ asset('css/componentes/bootstrap-datatable/css/dataTables.bootstrap4.min.css') }}"/>
+{% endblock %}
+
+{% block title %}Categorías{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('Script/categorias/index.js') }}"></script>
+<script src="{{ asset('Script/categorias/indexInsertar.js') }}"></script>
+<script src="{{ asset('css/componentes/bootstrap-datatable/js/traduccion.js') }}"></script>
+<script src="{{ asset('css/componentes/bootstrap-datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('css/componentes/bootstrap-datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('Script/validaciones.js') }}"></script>
+
+{% endblock %}
+
+{% block body %}
+<input type="hidden" id="actualizarNombreURL" value="{{ path('categoria_actualizar_nombre') }}">
+<input type="hidden" id="ingresarNombreURL" value="{{ path('categorias_new_nombre') }}">
+
+<div class="container mt-1 mb-1">
+  <div class="panel panel-default border">
+    <div class="panel-heading">
+      <h3>Listado de categorías</h3>
+    </div>
+    <div class="panel-body table-responsive trans-opacity-0">
+      <a id="add_ow" class="nombreAgregar icono text-primary float-left" data-toggle="tooltip" data-placement="top" title="Agregar Nombre"  style="cursor:pointer;"><i class="far fa-plus-square"></i></a>
+      <br>
+      <br>
+      <table id="tablaCategorias" class="table table-bordered table-hover">
+        <colgroup>
+          <col span="1" style="width: 95%;">
+          <col span="1" style="width: 5%;">
+        </colgroup>
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Nombre</th>
+          </tr>
+        </thead>
+        <tbody id="content_table">
+          {% for categoria in categorias %}
+          <tr idCategoria="{{categoria.idCategoria}}">
+            <td class="align-middle pointer nombre" data-order="{{ categoria.nombre }}" data-toggle="tooltip" data-placement="top" title="Modificar Nombre">{{ categoria.nombre }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

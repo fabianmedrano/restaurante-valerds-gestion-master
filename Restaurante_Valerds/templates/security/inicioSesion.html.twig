@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inicio de Sesión{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"/>
+  <link rel="stylesheet" href="{{ asset('css/login/login.css') }}"/>
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('Script/login/login.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+  <div class="container" style="display: flex;">
+    <div class="panel panel-default p-5 " style="margin:auto; box-shadow: gray 5px 5px 10px 0px; border: solid 5px; border-color: #36DADA; color:white; width: 400px; border-radius: 20px; background: linear-gradient(158deg, #36DADA 60%, #FBBC3F 60%);">
+      <div class="panel-body">
+        <h3 class="font-weight-bold text-center mb-5 ">Inicio de Sesión</h3>
+        {{ include('/security/_login_form.html.twig') }}
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

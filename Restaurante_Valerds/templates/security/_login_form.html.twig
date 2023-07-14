@@ -1,0 +1,16 @@
+<form method="post">
+    <div class="form-group">
+      <label class="font-weight-bold">Usuario</label>
+      <input type="text" value="{{ ultimo_usuario }}" name="usuario" id="inputUsuario" class="form-control" placeholder="Usuario" required autofocus>
+    </div>
+    <div class="form-group">
+      <label class="font-weight-bold">Contraseña</label>
+      <div class="input-group">
+        <input type="password" name="contrasena" id="contrasena" class="form-control" placeholder="Password" required>
+        <div class="input-group-append cont-agregado">
+            <span class="input-group-text" id="visibilidad"><i id="ojo" class="fas fa-eye-slash"></i></span>
+        </div>
+      </div>
+    </div>
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    <input type="submit" id="enviar" type="button" class="btn btn-primary font-weight-bold mt-3" style="border-radius: 20px; width:100%; font-size:20px;" value="Ingresar"/ >

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Menu{% endblock %}
+
+{% block body %}
+    <h1>Menu</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdMenu</th>
+                <td>{{ menu.idMenu }}</td>
+            </tr>
+            <tr>
+                <th>IdCategoria</th>
+                <td>{{ menu.idCategoria }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ menu.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ menu.descripcion }}</td>
+            </tr>
+            <tr>
+                <th>Precio</th>
+                <td>{{ menu.precio }}</td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td>{{ menu.estado ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('menu_index') }}">back to list</a>
+
+    <a href="{{ path('menu_edit', {'idMenu': menu.idMenu}) }}">edit</a>
+
+
+{% endblock %}

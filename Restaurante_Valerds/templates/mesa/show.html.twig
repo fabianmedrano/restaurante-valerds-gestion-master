@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mesa{% endblock %}
+
+{% block body %}
+    <h1>Mesa</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdMesa</th>
+                <td>{{ mesa.idMesa }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('mesa_index') }}">back to list</a>
+
+    <a href="{{ path('mesa_edit', {'idMesa': mesa.idMesa}) }}">edit</a>
+
+    {{ include('mesa/_delete_form.html.twig') }}
+{% endblock %}

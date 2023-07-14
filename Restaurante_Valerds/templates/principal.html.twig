@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}
+<style type="text/css">
+@font-face {
+  font-family: 'RhumbaScriptNF';
+  src: url("{{ asset('fonts/RhumbaScriptNF.ttf') }}");
+}
+</style>
+{% endblock %}
+
+{% block title %}Principal{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link href="{{ asset('css/principal/principal.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('Script/principal/principal.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <div id="titulo">
+      <p class="select-none" style="font-size:15vw;">Restaurante Valverd's</p>
+    </div>
+  </div>
+{% endblock %}

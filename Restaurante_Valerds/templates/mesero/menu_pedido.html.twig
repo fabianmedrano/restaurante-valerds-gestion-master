@@ -1,0 +1,146 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"/>
+  <link rel="stylesheet" href="{{ asset('css/mesero/mesero_pedido.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('css/validaciones.css') }}"/>
+{% endblock %}
+
+{% block title %}Creación de pedido{% endblock %}
+
+{% block javascripts %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+  {{ parent() }}
+  <script src="{{ asset('Script/validaciones.js') }}"></script>
+  <script src="{{ asset('Script/mesero/mesero_pedido.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+  <input type="hidden" id="crearPedidoURL" value="{{ path('mesero_crear_pedido') }}">
+
+  <div>
+    <div id="opciones">
+      <input id="verPedido" class="btn opcion select-none" type="button" value="Ver pedido" disabled="disabled">
+
+      <div id="mostrarCategorias" class="dropdown show select-none dropright">
+        <input class="btn dropdown-toggle opcion" type="button" value="Ir a categoría" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="dropdown-menu dropdown-menu-custom" aria-labelledby="dropdownMenuLink">
+          <div class="scrollable-menu">
+            {% for categoria in categorias %}
+              <a id="{{categoria.idCategoria}}" class="dropdown-item" href="#">{{ categoria.nombre }}</a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contenedor">
+      {% set categoriaActual = null %}
+      {% set categoriaNueva = null %}
+      {% set conteo = 0 %}
+      {% for platillo in menu %}
+        {% set categoriaNueva = platillo.id_categoria %}
+        {% if categoriaActual == null %}
+          {% set categoriaActual = platillo.id_categoria %}
+          {% set categoriaNueva = platillo.id_categoria %}
+          {# muestra fila de categoria #}
+          <div class="row filaCategoria">
+            <p id="categoria{{categoriaActual}}">{{platillo.nombre_categoria  }}
+            </p>
+          </div>
+        {% else %}
+          {% if categoriaActual != categoriaNueva %}
+            {% set categoriaActual = categoriaNueva %}
+            {% set conteo = 0 %}
+            {# cierra ultima fila de platillos #}
+          </div>
+          {# muestra fila de categoria #}
+          <div class="row filaCategoria">
+            <p id="categoria{{categoriaActual}}">{{platillo.nombre_categoria }}
+            </p>
+          </div>
+        {% endif %}
+      {% endif %}
+
+      {% if conteo == 0 %}
+        {# inicia fila de platillos #}
+        <div id="{{platillo.idMenu}}" idcategoria="{{platillo.id_categoria}}" class="row filaPlatillos">
+        {% endif %}
+
+        {% if conteo == 4 %}
+          {# cierra ultima fila de platillos #}
+        </div>
+        {# inicia fila de platillos #}
+        <div id="" idcategoria="{{platillo.id_categoria}}" class="row filaPlatillos">
+          {% set conteo = 0 %}
+        {% endif %}
+
+        <div id="{{platillo.idMenu}}" class="columnaPlatillo col-lg-3 col-md-4 col-sm-6 col-xs-12">
+          <div class="nombre">
+            <p>{{platillo.nombre_menu}}</p>
+          </div>
+          <div class="texto">
+            <p>{{platillo.descripcion}}</p>
+          </div>
+          <p class="precio">₡{{platillo.precio}}</p>
+        </div>
+        {% set conteo = conteo + 1 %}
+      {% endfor %}
+      {# cierra ultima fila de platillos #}
+    </div>
+
+    <div class="modalC">
+
+      <div id="menu" style="display:flex; flex-direction:column; padding:10px; border-radius: 3px;">
+
+        <div class="mb-2">
+          <div style="overflow: visible;">
+            <div class="float-left">
+              <div id="mesa" class="dropdown">
+                <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Seleccione la mesa</button>
+                <div class="dropdown-menu dropdown-menu-custom">
+                  <div class="scrollable-menu">
+                    <a class="dropdown-item seleccionado" value="0">Seleccione la mesa</a>
+                    {% for mesa in mesas %}
+                      <a class="dropdown-item" value="{{mesa.idMesa}}">Mesa
+                        {{mesa.idMesa}}</a>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="float-right">
+              <input id="finalizar" type="button" class="btn btn-primary" value="Crear" disabled="disabled">
+            </div>
+          </div>
+        </div>
+
+        <div style="flex:1; overflow-y:auto;">
+          <table id="tablaPedido" class="table table-bordered table-hover m-auto">
+            <colgroup>
+              <col span="1" style="width: 70%;">
+              <col span="1" style="width: 15%;">
+              <col span="1" style="width: 15%;">
+            </colgroup>
+            <thead class="sticky">
+              <td class="font-weight-bold align-middle">Nombre</td>
+              <td class="font-weight-bold align-middle texto-verde">Cantidad</td>
+              <td title="Limpiar el pedido" class="align-middle text-center">
+                <i id="limpiarPedido" class="text-danger far fa-minus-square"></i>
+              </td>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="mt-2">
+          <div class="float-right">
+            <input id="cerrarPrevPedido" type="button" class="btn btn-primary" value="Volver">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+{% endblock %}

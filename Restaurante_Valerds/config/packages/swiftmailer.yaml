@@ -1,0 +1,4 @@
+swiftmailer:
+    url: '%env(MAILER_URL)%'
+    #url: 'gmail://correo:contra@localhost'
+    spool: { type: 'memory' }

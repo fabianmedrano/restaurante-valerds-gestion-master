@@ -1,0 +1,19 @@
+
+/* SEDA ESTILO VISAL DE QUE ES SELECCIONABLE */
+
+.seleccionable:hover{
+    color:red;  
+}
+.seleccionado{ 
+    background:#975992 ;
+    color:aliceblue;
+
+}
+.seleccionado:hover{
+    pointer-events:none;
+}
+
+.seleccionado > .fas+ .fa-eye{
+
+    color:aliceblue;
+}

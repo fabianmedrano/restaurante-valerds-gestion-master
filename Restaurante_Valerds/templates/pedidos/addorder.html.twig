@@ -1,0 +1,157 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"/>
+  <link rel="stylesheet" href="{{ asset('css/mesero/mesero_pedido.css') }}"/>
+{% endblock %}
+
+{% block title %}Pedido {{pedido}}, mesa {{mesa}}{% endblock %}
+
+{% block javascripts %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+  {{ parent() }}
+  <script src="{{ asset('Script/validaciones.js') }}"></script>
+  <script src="{{ asset('Script/pedidos/addorder.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+  <div>
+  <input type="hidden" id="guardaragregarURL" value="{{ path('agregarAPedido') }}">
+    <div id="opciones">
+      <div id="verPedido" class="btn opcion select-none">
+        Ver pedido
+      </div>
+      <div id="mostrarCategorias" class="dropdown show select-none ml-5px dropright">
+        <a class="btn dropdown-toggle opcion" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ir a categoría</a>
+        <div class="dropdown-menu scrollable-menu dropdown-menu-custom" aria-labelledby="dropdownMenuLink">
+          {% for categoria in categorias %}
+            <a id="{{categoria.idCategoria}}" class="dropdown-item" href="#">{{ categoria.nombre }}</a>
+          {% endfor %}
+        </div>
+      </div>
+        <div id="regresar" class="btn opcion select-none">
+        Regresar
+      </div>
+    </div>
+
+    <div class="contenedor">
+      {% set categoriaActual = null %}
+      {% set categoriaNueva = null %}
+      {% set conteo = 0 %}
+      {% for platillo in menu %}
+        {% set categoriaNueva = platillo.id_categoria %}
+        {% if categoriaActual == null %}
+          {% set categoriaActual = platillo.id_categoria %}
+          {% set categoriaNueva = platillo.id_categoria %}
+          {# muestra fila de categoria #}
+          <div class="row filaCategoria">
+            <p id="categoria{{categoriaActual}}">{{platillo.nombre_categoria  }} </p>
+          </div>
+        {% else %}
+            {% if categoriaActual != categoriaNueva %}
+              {% set categoriaActual = categoriaNueva %}
+              {% set conteo = 0  %}
+              {# cierra ultima fila de platillos #}
+              </div>
+              {# muestra fila de categoria #}
+              <div class="row filaCategoria">
+                <p id="categoria{{categoriaActual}}">{{platillo.nombre_categoria }} </p>
+              </div>
+            {% endif %}
+        {% endif %}
+
+        {% if conteo == 0 %}
+          {# inicia fila de platillos #}
+          <div id="{{platillo.idMenu}}" idCategoria="{{platillo.id_categoria}}" class="row filaPlatillos">
+        {% endif %}
+
+        {% if conteo == 4 %}
+          {# cierra ultima fila de platillos #}
+          </div>
+          {# inicia fila de platillos #}
+          <div id="" idCategoria="{{platillo.id_categoria}}" class="row filaPlatillos">
+          {% set conteo = 0 %}
+        {% endif %}
+
+        <div id="{{platillo.idMenu}}" class="columnaPlatillo col-lg-3 col-md-4 col-sm-6 col-xs-12">
+          <div class="nombre">
+            <p>{{platillo.nombre_menu}}</p>
+          </div>
+          <div class="texto">
+            <p>{{platillo.descripcion}}</p>
+          </div>
+          <p class="precio">₡{{platillo.precio}}</p>
+        </div>
+        {% set conteo = conteo + 1 %}
+      {% endfor %}
+      {# cierra ultima fila de platillos #}
+      </div>
+
+    <div class="modalC">
+      <div id="menu" class="panel panel-default">
+        <div class="panel-body" style="overflow: visible;">
+          <div style="overflow: visible;">
+            <div class="mb-2 float-left">
+              <div  class="btn-group">
+                  <button type="button" class="btn btn-dark " 
+                 aria-haspopup="true" aria-expanded="false"
+                 id="mesa"
+                  disabled value="{{mesa}}">Mesa {{mesa}}</button>
+
+              </div>
+            </div>
+            <div class="float-right">
+              <input id="finalizar" type="button" class="btn btn-primary" value="Guardar">
+            </div>
+          </div>
+
+          <!---->
+        <div class="panel" style="width:100%;  height 100%; margin:0px; pading:0px;"> 
+            <table id="tablaPedido" class="table table-bordered table-hover">
+              <colgroup>
+                <col span="1" style="width: 70%;">
+                <col span="1" style="width: 16%;">
+                <col span="1" style="width: 14%;">
+              </colgroup>
+              <thead class="sticky">
+                <td class="font-weight-bold align-middle">Nombre</td>
+                <td class="font-weight-bold align-middle">Cantidad</td>
+                <td class="align-middle text-center"><i id="limpiarPedido" class="text-danger far fa-minus-square"></i></td>
+              </thead>
+              <tbody>
+           
+              </tbody>
+            </table>
+          </div>
+          
+          <!---->
+
+          <div class="panel" style="width:100%;  height 100%; margin:0px; pading:0px;"> 
+            <table  class="table table-bordered table-hover">
+              <colgroup>
+                <col span="1" style="width: 70%;">
+                <col span="1" style="width: 30%;">
+              </colgroup>
+              <thead class="sticky">
+                <td class="font-weight-bold align-middle">Nombre</td>
+                <td class="font-weight-bold align-middle">Cantidad</td>
+              </thead>
+              <tbody>
+                  {% for pedido in pedidos %}
+                    <tr disabled>
+                      <td class="nombreTabla">{{pedido.nombre}}</td>
+                      <td class="cantidad">{{pedido.cantidad}}</td>
+                    </tr>
+                    {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <!---->
+        </div>
+      </div>
+    </div>
+</div>
+<input type="text" id="idPedido" style="display:none" value="{{pedido}}">
+
+{% endblock %}

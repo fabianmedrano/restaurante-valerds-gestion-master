@@ -1,0 +1,52 @@
+.navbar.navbar-expand-lg.navbar-dark {
+  background-color: #17a2b8;
+  padding: 0;
+}
+
+.navbar.navbar-expand-lg.navbar-dark .navbar-brand {
+    padding-left: 15px;
+}
+
+.navbar.navbar-expand-lg.navbar-dark .navbar-brand:focus,
+.navbar.navbar-expand-lg.navbar-dark .navbar-brand:hover
+{
+
+}
+
+.navbar.navbar-expand-lg.navbar-dark .collapse.navbar-collapse {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar.navbar-expand-lg.navbar-dark .collapse.navbar-collapse .navbar-nav {
+  margin: 0;
+  padding: 0;
+  height:auto;
+}
+
+.navbar.navbar-expand-lg.navbar-dark > div > .navbar-nav >li > a{
+  color:white;
+  padding:15px;
+}
+
+.navbar.navbar-expand-lg.navbar-dark .collapse.navbar-collapse .navbar-nav .nav-item:focus,
+.navbar.navbar-expand-lg.navbar-dark .collapse.navbar-collapse .navbar-nav .nav-item:hover {
+  background-color: #FBBC3F;
+}
+
+.navbar.navbar-expand-lg.navbar-dark .collapse.navbar-collapse .navbar-nav .nav-item.dropdown .dropdown-menu {
+  background-color: #17a2b8;
+}
+
+.navbar.navbar-expand-lg.navbar-dark .collapse.navbar-collapse .navbar-nav .nav-item.dropdown .dropdown-menu .dropdown-item {
+  color: white;
+}
+
+.navbar.navbar-expand-lg.navbar-dark .collapse.navbar-collapse .navbar-nav .nav-item.dropdown .dropdown-menu .dropdown-item:focus,
+.navbar.navbar-expand-lg.navbar-dark .collapse.navbar-collapse .navbar-nav .nav-item.dropdown .dropdown-menu .dropdown-item:hover {
+  background-color: #944E97;
+}
+
+#as{
+height: 80%;
+}

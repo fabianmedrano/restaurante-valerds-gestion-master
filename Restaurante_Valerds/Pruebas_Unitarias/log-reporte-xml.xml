@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="tests/" tests="25" assertions="25" errors="0" failures="0" skipped="0" time="11.472866">
+    <testsuite name="Tests\DataCategoriasTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataCategoriasTest.php" tests="4" assertions="4" errors="0" failures="0" skipped="0" time="1.992625">
+      <testcase name="test1ObtenerListadoCategorias" class="Tests\DataCategoriasTest" classname="Tests.DataCategoriasTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataCategoriasTest.php" line="33" assertions="1" time="0.497045"/>
+      <testcase name="test2RegistrarCategoria" class="Tests\DataCategoriasTest" classname="Tests.DataCategoriasTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataCategoriasTest.php" line="38" assertions="1" time="0.364924"/>
+      <testcase name="test3EditarCategoria" class="Tests\DataCategoriasTest" classname="Tests.DataCategoriasTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataCategoriasTest.php" line="43" assertions="1" time="0.512740"/>
+      <testcase name="test4EliminarCambios" class="Tests\DataCategoriasTest" classname="Tests.DataCategoriasTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataCategoriasTest.php" line="51" assertions="1" time="0.617916"/>
+    </testsuite>
+    <testsuite name="Tests\DataFacturasTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataFacturasTest.php" tests="3" assertions="3" errors="0" failures="0" skipped="0" time="1.264184">
+      <testcase name="test1ObtenerListadoFacturas" class="Tests\DataFacturasTest" classname="Tests.DataFacturasTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataFacturasTest.php" line="34" assertions="1" time="0.451598"/>
+      <testcase name="test2ObtenerDetalleFactura" class="Tests\DataFacturasTest" classname="Tests.DataFacturasTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataFacturasTest.php" line="39" assertions="1" time="0.379309"/>
+      <testcase name="test3ObtenerDetalleFacturaTotal" class="Tests\DataFacturasTest" classname="Tests.DataFacturasTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataFacturasTest.php" line="44" assertions="1" time="0.433277"/>
+    </testsuite>
+    <testsuite name="Tests\DataInventarioTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataInventarioTest.php" tests="4" assertions="4" errors="0" failures="0" skipped="0" time="1.832318">
+      <testcase name="test1ObtenerListadoInventario" class="Tests\DataInventarioTest" classname="Tests.DataInventarioTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataInventarioTest.php" line="33" assertions="1" time="0.395819"/>
+      <testcase name="test2RegistrarInventario" class="Tests\DataInventarioTest" classname="Tests.DataInventarioTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataInventarioTest.php" line="38" assertions="1" time="0.397934"/>
+      <testcase name="test3EditarInventario" class="Tests\DataInventarioTest" classname="Tests.DataInventarioTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataInventarioTest.php" line="47" assertions="1" time="0.438680"/>
+      <testcase name="test4EliminarCambios" class="Tests\DataInventarioTest" classname="Tests.DataInventarioTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataInventarioTest.php" line="55" assertions="1" time="0.599885"/>
+    </testsuite>
+    <testsuite name="Tests\DataMenuTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataMenuTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.418277">
+      <testcase name="test1ObtenerListadoMenu" class="Tests\DataMenuTest" classname="Tests.DataMenuTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataMenuTest.php" line="34" assertions="1" time="0.418277"/>
+    </testsuite>
+    <testsuite name="Tests\DataMesaTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataMesaTest.php" tests="4" assertions="4" errors="0" failures="0" skipped="0" time="1.600614">
+      <testcase name="test1ObtenerMesas" class="Tests\DataMesaTest" classname="Tests.DataMesaTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataMesaTest.php" line="34" assertions="1" time="0.378839"/>
+      <testcase name="test2ObtenerMesasPedidosPendientes" class="Tests\DataMesaTest" classname="Tests.DataMesaTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataMesaTest.php" line="39" assertions="1" time="0.434046"/>
+      <testcase name="test3ObtenerMesa" class="Tests\DataMesaTest" classname="Tests.DataMesaTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataMesaTest.php" line="44" assertions="1" time="0.390700"/>
+      <testcase name="test4ObtenerNumeroMesa" class="Tests\DataMesaTest" classname="Tests.DataMesaTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataMesaTest.php" line="49" assertions="1" time="0.397029"/>
+    </testsuite>
+    <testsuite name="Tests\DataPedidosTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataPedidosTest.php" tests="4" assertions="4" errors="0" failures="0" skipped="0" time="1.611782">
+      <testcase name="test1ObtenerPedidoMesa" class="Tests\DataPedidosTest" classname="Tests.DataPedidosTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataPedidosTest.php" line="44" assertions="1" time="0.428449"/>
+      <testcase name="test2ObtenerListadoPlatillosPedido" class="Tests\DataPedidosTest" classname="Tests.DataPedidosTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataPedidosTest.php" line="49" assertions="1" time="0.430082"/>
+      <testcase name="test3OobtenerTotalPedido" class="Tests\DataPedidosTest" classname="Tests.DataPedidosTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataPedidosTest.php" line="54" assertions="1" time="0.390050"/>
+      <testcase name="test4ObtenerListadoPedidosMesa" class="Tests\DataPedidosTest" classname="Tests.DataPedidosTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataPedidosTest.php" line="59" assertions="1" time="0.363201"/>
+    </testsuite>
+    <testsuite name="Tests\DataPermisosTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataPermisosTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.379767">
+      <testcase name="test1ObtenerPermisos" class="Tests\DataPermisosTest" classname="Tests.DataPermisosTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataPermisosTest.php" line="33" assertions="1" time="0.379767"/>
+    </testsuite>
+    <testsuite name="Tests\DataUsuariosTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataUsuariosTest.php" tests="4" assertions="4" errors="0" failures="0" skipped="0" time="2.373300">
+      <testcase name="test1ObtenerListadoUsuarios" class="Tests\DataUsuariosTest" classname="Tests.DataUsuariosTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataUsuariosTest.php" line="33" assertions="1" time="0.366347"/>
+      <testcase name="test2RegistrarUsuario" class="Tests\DataUsuariosTest" classname="Tests.DataUsuariosTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataUsuariosTest.php" line="38" assertions="1" time="0.567108"/>
+      <testcase name="test3EditarUsuario" class="Tests\DataUsuariosTest" classname="Tests.DataUsuariosTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataUsuariosTest.php" line="49" assertions="1" time="0.705413"/>
+      <testcase name="test4EliminarCambios" class="Tests\DataUsuariosTest" classname="Tests.DataUsuariosTest" file="D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataUsuariosTest.php" line="57" assertions="1" time="0.734432"/>
+    </testsuite>
+  </testsuite>
+</testsuites>

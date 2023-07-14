@@ -1,0 +1,454 @@
+Pruebas unitarias: Tests/
+
+-----Detalles-----
+
+Pruebas: 25
+Acertadas: 20
+Fallidas: 3
+Erroneas: 2
+Omitidas: 0
+Tiempo de ejecución: 28.656428
+
+
+
+
+----------------------------------------------------------------------
+Clase de pruebas: Tests\DataCategoriasTest
+----------------------------------------------------------------------
+
+-----Detalles-----
+
+Ruta: D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataCategoriasTest.php
+Pruebas: 4
+Acertadas: 2
+Fallidas: 0
+Erroneas: 2
+Omitidas: 0
+Tiempo de ejecución: 3.201389
+
+
+*************************************************
+Prueba: test1ObtenerListadoCategorias
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataCategoriasTest
+Linea: 33
+Tiempo de ejecución: 1.150982
+Estado: Acertado
+
+
+*************************************************
+Prueba: test2RegistrarCategoria
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataCategoriasTest
+Linea: 38
+Tiempo de ejecución: 0.003777
+Estado: Erroneo
+
+-----Detalles del error-----
+
+Tipo: ArgumentCountError
+Descripción: ArgumentCountError: Too few arguments to function App\Data\DataCategorias::registrarCategoria(), 2 passed in D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataCategoriasTest.php on line 41 and exactly 3 expected
+
+*************************************************
+Prueba: test3EditarCategoria
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataCategoriasTest
+Linea: 45
+Tiempo de ejecución: 0.991022
+Estado: Erroneo
+
+-----Detalles del error-----
+
+Tipo: Error
+Descripción: Error: Call to a member function getIdCategoria() on null
+
+*************************************************
+Prueba: test4EliminarCambios
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataCategoriasTest
+Linea: 53
+Tiempo de ejecución: 1.055608
+Estado: Acertado
+
+
+----------------------------------------------------------------------
+Clase de pruebas: Tests\DataFacturasTest
+----------------------------------------------------------------------
+
+-----Detalles-----
+
+Ruta: D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataFacturasTest.php
+Pruebas: 3
+Acertadas: 1
+Fallidas: 2
+Erroneas: 0
+Omitidas: 0
+Tiempo de ejecución: 2.888337
+
+
+*************************************************
+Prueba: test1ObtenerListadoFacturas
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataFacturasTest
+Linea: 34
+Tiempo de ejecución: 1.014712
+Estado: Acertado
+
+
+*************************************************
+Prueba: test2ObtenerDetalleFactura
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataFacturasTest
+Linea: 39
+Tiempo de ejecución: 0.896040
+Estado: Fallido
+
+-----Detalles del fallo-----
+
+Tipo: PHPUnit\Framework\ExpectationFailedException
+Descripción: Failed asserting that null is not null.
+
+*************************************************
+Prueba: test3ObtenerDetalleFacturaTotal
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataFacturasTest
+Linea: 44
+Tiempo de ejecución: 0.977585
+Estado: Fallido
+
+-----Detalles del fallo-----
+
+Tipo: PHPUnit\Framework\ExpectationFailedException
+Descripción: Failed asserting that null is not null.
+
+----------------------------------------------------------------------
+Clase de pruebas: Tests\DataInventarioTest
+----------------------------------------------------------------------
+
+-----Detalles-----
+
+Ruta: D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataInventarioTest.php
+Pruebas: 4
+Acertadas: 4
+Fallidas: 0
+Erroneas: 0
+Omitidas: 0
+Tiempo de ejecución: 6.728914
+
+
+*************************************************
+Prueba: test1ObtenerListadoInventario
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataInventarioTest
+Linea: 33
+Tiempo de ejecución: 1.352527
+Estado: Acertado
+
+
+*************************************************
+Prueba: test2RegistrarInventario
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataInventarioTest
+Linea: 38
+Tiempo de ejecución: 2.194091
+Estado: Acertado
+
+
+*************************************************
+Prueba: test3EditarInventario
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataInventarioTest
+Linea: 47
+Tiempo de ejecución: 1.463554
+Estado: Acertado
+
+
+*************************************************
+Prueba: test4EliminarCambios
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataInventarioTest
+Linea: 55
+Tiempo de ejecución: 1.718742
+Estado: Acertado
+
+
+----------------------------------------------------------------------
+Clase de pruebas: Tests\DataMenuTest
+----------------------------------------------------------------------
+
+-----Detalles-----
+
+Ruta: D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataMenuTest.php
+Pruebas: 1
+Acertadas: 1
+Fallidas: 0
+Erroneas: 0
+Omitidas: 0
+Tiempo de ejecución: 0.963437
+
+
+*************************************************
+Prueba: test1ObtenerListadoMenu
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataMenuTest
+Linea: 34
+Tiempo de ejecución: 0.963437
+Estado: Acertado
+
+
+----------------------------------------------------------------------
+Clase de pruebas: Tests\DataMesaTest
+----------------------------------------------------------------------
+
+-----Detalles-----
+
+Ruta: D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataMesaTest.php
+Pruebas: 4
+Acertadas: 4
+Fallidas: 0
+Erroneas: 0
+Omitidas: 0
+Tiempo de ejecución: 4.074130
+
+
+*************************************************
+Prueba: test1ObtenerMesas
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataMesaTest
+Linea: 34
+Tiempo de ejecución: 1.017683
+Estado: Acertado
+
+
+*************************************************
+Prueba: test2ObtenerMesasPedidosPendientes
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataMesaTest
+Linea: 39
+Tiempo de ejecución: 1.030414
+Estado: Acertado
+
+
+*************************************************
+Prueba: test3ObtenerMesa
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataMesaTest
+Linea: 44
+Tiempo de ejecución: 1.054397
+Estado: Acertado
+
+
+*************************************************
+Prueba: test4ObtenerNumeroMesa
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataMesaTest
+Linea: 49
+Tiempo de ejecución: 0.971636
+Estado: Acertado
+
+
+----------------------------------------------------------------------
+Clase de pruebas: Tests\DataPedidosTest
+----------------------------------------------------------------------
+
+-----Detalles-----
+
+Ruta: D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataPedidosTest.php
+Pruebas: 4
+Acertadas: 3
+Fallidas: 1
+Erroneas: 0
+Omitidas: 0
+Tiempo de ejecución: 3.843853
+
+
+*************************************************
+Prueba: test1ObtenerPedidoMesa
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataPedidosTest
+Linea: 44
+Tiempo de ejecución: 0.936716
+Estado: Acertado
+
+
+*************************************************
+Prueba: test2ObtenerListadoPlatillosPedido
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataPedidosTest
+Linea: 49
+Tiempo de ejecución: 1.063365
+Estado: Acertado
+
+
+*************************************************
+Prueba: test3OobtenerTotalPedido
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataPedidosTest
+Linea: 54
+Tiempo de ejecución: 0.871077
+Estado: Acertado
+
+
+*************************************************
+Prueba: test4ObtenerListadoPedidosMesa
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataPedidosTest
+Linea: 59
+Tiempo de ejecución: 0.972695
+Estado: Fallido
+
+-----Detalles del fallo-----
+
+Tipo: PHPUnit\Framework\ExpectationFailedException
+Descripción: Failed asserting that null is not null.
+
+----------------------------------------------------------------------
+Clase de pruebas: Tests\DataPermisosTest
+----------------------------------------------------------------------
+
+-----Detalles-----
+
+Ruta: D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataPermisosTest.php
+Pruebas: 1
+Acertadas: 1
+Fallidas: 0
+Erroneas: 0
+Omitidas: 0
+Tiempo de ejecución: 1.003745
+
+
+*************************************************
+Prueba: test1ObtenerPermisos
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataPermisosTest
+Linea: 33
+Tiempo de ejecución: 1.003745
+Estado: Acertado
+
+
+----------------------------------------------------------------------
+Clase de pruebas: Tests\DataUsuariosTest
+----------------------------------------------------------------------
+
+-----Detalles-----
+
+Ruta: D:\Bibliotecas\Escritorio\Restaurante_Valerds\tests\Data\DataUsuariosTest.php
+Pruebas: 4
+Acertadas: 4
+Fallidas: 0
+Erroneas: 0
+Omitidas: 0
+Tiempo de ejecución: 5.952623
+
+
+*************************************************
+Prueba: test1ObtenerListadoUsuarios
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataUsuariosTest
+Linea: 33
+Tiempo de ejecución: 0.984957
+Estado: Acertado
+
+
+*************************************************
+Prueba: test2RegistrarUsuario
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataUsuariosTest
+Linea: 38
+Tiempo de ejecución: 1.340280
+Estado: Acertado
+
+
+*************************************************
+Prueba: test3EditarUsuario
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataUsuariosTest
+Linea: 49
+Tiempo de ejecución: 1.868101
+Estado: Acertado
+
+
+*************************************************
+Prueba: test4EliminarCambios
+*************************************************
+
+-----Detalles-----
+
+Clase contenedora: Tests\DataUsuariosTest
+Linea: 57
+Tiempo de ejecución: 1.759285
+Estado: Acertado
+
+

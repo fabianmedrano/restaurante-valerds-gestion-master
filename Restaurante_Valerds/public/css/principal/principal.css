@@ -1,0 +1,17 @@
+#titulo {
+  margin: auto;
+  height: fit-content;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+}
+
+#titulo p {
+  font-family: 'RhumbaScriptNF';
+  font-size: 170px;
+  color: #5B4E4E;
+  font-weight: bold;
+  text-shadow: 3px 3px 0px white;
+}
