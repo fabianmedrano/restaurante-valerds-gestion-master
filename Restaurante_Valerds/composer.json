@@ -42,7 +42,7 @@
         "symfony/browser-kit": "4.2.*",
         "symfony/css-selector": "4.2.*",
         "symfony/debug-bundle": "4.2.*",
-        "symfony/maker-bundle": "^1.11",
+        "symfony/maker-bundle": "^1.35",
         "symfony/phpunit-bridge": "4.2.*",
         "symfony/stopwatch": "4.2.*",
         "symfony/web-profiler-bundle": "4.2.*"
