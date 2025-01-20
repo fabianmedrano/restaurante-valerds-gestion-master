@@ -12,7 +12,7 @@ class DataUsuarios {
 
     try {
       $usuarios = array();
-      $sql = "call sp_get_usuarios();";
+      $sql = "SELECT * FROM usuarios" ;
       $stmt = $entityManager->getConnection()->prepare($sql);
       $stmt->execute();
       $result = $stmt->fetchAll();
@@ -44,7 +44,7 @@ class DataUsuarios {
       $nombre = $usuario->getNombre();
       $correo = $usuario->getCorreo();
 
-      $sql = "call sp_insert_usuarios(:usuario,:contrasena,:estado,:nombre,:correo, @idUsuario);";
+      $sql = " INSERT INTO usuarios (usuario, estado, nombre, contrasena, correo) VALUES ( :usuario,:contrasena,:estado,:nombre, :correo) ";
       $entityManager->getConnection()->beginTransaction();
       $stmt = $entityManager->getConnection()->prepare($sql);
       $stmt->bindParam(':usuario', $nombreUsuario);
@@ -88,7 +88,7 @@ class DataUsuarios {
       $nombre = $usuario->getNombre();
       $correo = $usuario->getCorreo();
 
-      $sql = "call sp_update_usuario(:id_usuario,:usuario,:contrasena,:estado,:nombre,:correo);";
+      $sql = "UPDATE usuarios SET usuario = :usuario, estado = :estado, nombre = :nombre, contrasena = :contrasena, correo = :correo WHERE usuarios.id_usuario = :id_usuario";
       $entityManager->getConnection()->beginTransaction();
       $stmt = $entityManager->getConnection()->prepare($sql);
       $stmt->bindParam(':id_usuario', $idUsuario);

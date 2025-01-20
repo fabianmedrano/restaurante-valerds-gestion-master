@@ -11,7 +11,7 @@ class DataCategorias {
 
    try {
      $categorias = array();
-     $sql = "call sp_get_categorias();";
+     $sql = "SELECT * FROM categorias";
      $stmt = $entityManager->getConnection()->prepare($sql);
      $stmt->execute();
      $result = $stmt->fetchAll();
@@ -38,7 +38,7 @@ public function obtenerListadoCategoriasAsignadas($entityManager) {
 
  try {
    $categorias = array();
-   $sql = "call sp_get_categorias_asignadas();";
+   $sql = "SELECT * FROM categorias";
    $stmt = $entityManager->getConnection()->prepare($sql);
    $stmt->execute();
    $result = $stmt->fetchAll();
@@ -64,7 +64,7 @@ public function obtenerListadoCategoriasAsignadas($entityManager) {
 public function registrarCategoria($entityManager, $categoria,$nombre) {
 
  try {
-  $sql = "call sp_insert_categorias(:nombre);";
+  $sql = "INSERT INTO categorias ( nombre) VALUES (:nombre) ";
   $stmt = $entityManager->getConnection()->prepare($sql);
   $stmt->bindParam(':nombre', $nombre);
   $stmt->execute();
@@ -83,7 +83,7 @@ public function editarCategoria($entityManager, $categoria) {
  try {
   $idCategoria = $categoria->getIdCategoria();
   $nombre = $categoria->getNombre();
-  $sql = "call sp_update_categorias(:id_categoria, :nombre);";
+  $sql = "UPDATE categorias SET nombre = :nombre WHERE categorias.id_categoria = :id_categoria ";
   $stmt = $entityManager->getConnection()->prepare($sql);
   $stmt->bindParam(':id_categoria', $idCategoria);
   $stmt->bindParam(':nombre', $nombre);
@@ -105,10 +105,10 @@ public function actualizarNombre($entityManager, $repositorio, $nombre, $idCateg
     $categoria= $repositorio->find($idCategoria);
 
     if ($categoria) {
-      $sql = "call sp_update_categorias(:idCategoria,:nombre);";
+      $sql = "UPDATE categorias SET nombre = :nombre WHERE categorias.id_categoria = :id_categoria ";
       $stmt = $entityManager->getConnection()->prepare($sql);
       $stmt->bindParam(':nombre', $nombre);
-      $stmt->bindParam(':idCategoria', $idCategoria);
+      $stmt->bindParam(':id_categoria', $idCategoria);
       $stmt->execute();
       $categoria->setNombre($nombre);
       $entityManager->flush();

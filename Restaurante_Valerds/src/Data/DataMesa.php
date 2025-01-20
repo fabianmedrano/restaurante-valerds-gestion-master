@@ -26,7 +26,7 @@ public function obtenerMesasPedidosPendientes($entityManager){
 
   try {
     $mesas = array();
-    $sql = "call sp_get_mesa_pendientes();";
+    $sql = "SELECT numeroMesa  FROM pedidos where estado = 0 ;";
     $stmt = $entityManager->getConnection()->prepare($sql);
     $stmt->execute();
     $result = $stmt->fetchAll();
@@ -36,7 +36,7 @@ public function obtenerMesasPedidosPendientes($entityManager){
        $mesas[] =
        array(
         'mesa' => $mesa['mesa'],
-        'pedidos'=> $mesa['pedidos']
+        'pedidos'=> $mesa['id_pedidos']
       );
      }
      $stmt->closeCursor();
@@ -51,7 +51,7 @@ public function obtenerMesasPedidosPendientes($entityManager){
 
 public function obtenerMesa($entityManager,$idPedido) {
   try {
-    $sql = "call sp_get_mesa_pedido(:idPedido);";
+    $sql = "SELECT numeroMesa FROM pedidos where id_pedido = :idPedido;";
     $stmt = $entityManager->getConnection()->prepare($sql);
     $stmt->bindParam(':idPedido', $idPedido);
     $stmt->execute();
@@ -72,7 +72,7 @@ public function obtenerMesa($entityManager,$idPedido) {
 
 public function obtenerNumeroMesa($entityManager) {
   try {
-    $sql = "call sp_get_cant_mesas();";
+    $sql = "select * from mesa;";
     $stmt = $entityManager->getConnection()->prepare($sql);
     $stmt->execute();
     $result = $stmt->fetch();
@@ -90,7 +90,7 @@ public function obtenerNumeroMesa($entityManager) {
 
 public function ModificarNumMesa($entityManager, $numero) {
  try {
-   $sql = "call sp_insert_mesa(:numero);";
+   $sql = "INSERT INTO `mesa`(`id_mesa`) VALUES (:numero);";
    $stmt = $entityManager->getConnection()->prepare($sql);
    $stmt->bindParam(':numero', $numero);
    $stmt->execute();

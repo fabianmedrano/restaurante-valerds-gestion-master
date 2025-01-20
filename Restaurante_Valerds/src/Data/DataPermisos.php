@@ -13,7 +13,7 @@ class DataPermisos {
 
     try {
       $permisos = array();
-      $sql = "call sp_get_permisos();";
+      $sql = "SELECT *   FROM permisos ";
       $stmt = $entityManager->getConnection()->prepare($sql);
       $stmt->execute();
       $result = $stmt->fetchAll();
@@ -40,7 +40,9 @@ class DataPermisos {
 
     try {
       $permisos = array();
-      $sql = "call sp_get_permisos_usuario(:id_usuario);";
+      $sql = "SELECT p.id_permiso, p.nombre, up.id_usuario 
+                FROM permisos p
+                LEFT JOIN permisos_usuarios  up ON p.id_permiso = up.id_permiso AND up.id_usuario = :id_usuario";
       $stmt = $entityManager->getConnection()->prepare($sql);
       $stmt->bindParam(':id_usuario', $idUsuario);
       $stmt->execute();

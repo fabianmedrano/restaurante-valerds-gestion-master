@@ -11,7 +11,7 @@ class DataFacturas{
 
     try {
       $facturas = array();
-      $sql = "call sp_get_todas_facturass();";
+      $sql = "SELECT facturas.* usuarios.nombre as cajero FROM facturas join usuario on usuarios.id = facturas.id_usuario";
       $stmt = $entityManager->getConnection()->prepare($sql);
       $stmt->execute();
       $result = $stmt->fetchAll();
@@ -41,8 +41,9 @@ public function obtenerDetalleFactura($entityManager, $idFactura) {
 
   try {
     $facturas = array();
-    $sql = "call sp_get_detalle_factura('.$idFactura.');";
+    $sql == "SELECT facturas.* usuarios.nombre as cajero FROM facturas join usuario on usuarios.id = facturas.id_usuario where facturas.id= :id_factura";
     $stmt = $entityManager->getConnection()->prepare($sql);
+    $stmt->bindParam(':id_factura',$idFactura);
     $stmt->execute();
     $result = $stmt->fetchAll();
     if ($result) {

@@ -65,10 +65,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             throw new InvalidCsrfTokenException();
         }
         $user = $this->entityManager->getRepository(Usuarios::class)->findOneBy(['usuario' => $credentials['usuario'], 'contrasena' => $credentials['contrasena'], 'estado' => 1]);
-
         if ($user) {
           $dp = new DataPermisos();
           $permisos = $dp->obtenerPermisosUsuario($user->getIdUsuario(), $this->entityManager);
+       
           $permisosUsuario = ['ROLE_USUARIO'];
 
           foreach ($permisos as $permiso) {

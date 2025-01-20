@@ -10,7 +10,7 @@ class DataPedidos {
   {
 
     try {
-      $sql = "call sp_get_idPedido_mesa(:mesa);";
+      $sql = "SELECT * FROM mesa WHERE numeroMesa = :mesa";
       $stmt = $entityManager->getConnection()->prepare($sql);
       $stmt->bindParam(':mesa', $mesa);
       $stmt->execute();
@@ -33,7 +33,7 @@ class DataPedidos {
   {
 
     try {
-      $sql = "call sp_get_mesa_idPedido(:idPedido);";
+      $sql = "SELECT numeroMesa FROM pedidos WHERE id_pedido = :idPedido;";
       $stmt = $entityManager->getConnection()->prepare($sql);
       $stmt->bindParam(':idPedido', $idPedido);
       $stmt->execute();
@@ -50,7 +50,7 @@ class DataPedidos {
     }
   }
 
-
+  //TODO:  DESIFRAR COMO FUNCIONA ESTO DE LOS  PEDIDOS Y CAMBIAR LOS PROCEDIMIENTOS ALMACENADOS
 
 
   public function obtenerListadoPlatillosPedido($entityManager, $idPedido) {

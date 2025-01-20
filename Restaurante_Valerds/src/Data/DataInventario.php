@@ -11,7 +11,7 @@ class DataInventario {
 
     try {
       $inventarios = array();
-      $sql = "call sp_get_inventario();";
+      $sql = "SELECT * FROM inventario";
       $stmt = $entityManager->getConnection()->prepare($sql);
       $stmt->execute();
       $result = $stmt->fetchAll();
@@ -43,7 +43,7 @@ public function registrarInventario($entityManager, $inventario) {
     $descripcion= $inventario->getDescripcion();
     $stock = $inventario->getStock();
 
-    $sql = "call sp_insert_articulos(:nombre,:descripcion,:stock);";
+    $sql = "INSERT INTO inventario ( nombre, descripcion, stock) VALUES (:nombre,:descripcion,:stock) ";
     $stmt = $entityManager->getConnection()->prepare($sql);
     $stmt->bindParam(':nombre', $nombre);
     $stmt->bindParam(':descripcion', $descripcion);
@@ -67,7 +67,8 @@ public function registrarInventario($entityManager, $inventario) {
       $descripcion = $inventario->getDescripcion();
       $stock = $inventario->getStock();
 
-      $sql = "call sp_update_inventario(:id_articulo,:nombre,:descripcion,:stock);";
+      $sql = "
+      UPDATE inventario SET nombre = :nombre, descripcion = :descripcion, stock = :stock WHERE inventario.id_articulo = :id_articulo";
       $stmt = $entityManager->getConnection()->prepare($sql);
       $stmt->bindParam(':id_articulo',$idInventario);
       $stmt->bindParam(':nombre', $nombre);
