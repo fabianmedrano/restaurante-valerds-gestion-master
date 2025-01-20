@@ -50,7 +50,8 @@ class MenuRepository extends ServiceEntityRepository
     public function findByMenuCompleto(): array
     {
 
-        $sql = "call sp_get_menu_completo();";
+        $sql = "SELECT menu.*,  categorias.nombre as nombre_categoria FROM `menu` join categorias ON categorias.id_categoria = menu.id_categoria;";
+  
       
         $entityManager = $this->getDoctrine()->getManager();
         $stmt = $entityManager->getConnection()->prepare($sql);

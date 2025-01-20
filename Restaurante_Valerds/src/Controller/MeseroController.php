@@ -31,7 +31,8 @@ class MeseroController extends AbstractController
   {
     try {
       $menu = array();
-      $sql = "call sp_get_menu_completo();";
+      $sql = "SELECT menu.* , categorias.nombre as nombre_categoria FROM `menu` join categorias ON categorias.id_categoria = menu.id_categoria;";
+  
       $entityManager = $this->getDoctrine()->getManager();
       $stmt = $entityManager->getConnection()->prepare($sql);
       $stmt->execute();
@@ -41,7 +42,7 @@ class MeseroController extends AbstractController
          $menu[] =
                array(
               'idMenu' => $platillo['id_menu'],
-              'nombre_menu' => $platillo['nombre_menu'],
+              'nombre_menu' => $platillo['nombre'],
               'descripcion' => $platillo['descripcion'],
               'precio' => $platillo['precio'],
               'estado' => $platillo['estado'],

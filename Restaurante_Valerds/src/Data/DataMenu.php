@@ -11,7 +11,8 @@ class DataMenu {
 
     try {
       $menu = array();
-      $sql = "call sp_get_menu_completo();";
+      $sql = "SELECT menu.* , categorias.nombre as nombre_categoria FROM `menu` join categorias ON categorias.id_categoria = menu.id_categoria;";
+  
        $stmt = $entityManager->getConnection()->prepare($sql);
       $stmt->execute();
       $result = $stmt->fetchAll();
@@ -21,7 +22,7 @@ class DataMenu {
          $menu[] =
          array(
           'idMenu' => $platillo['id_menu'],
-          'nombreMenu' => $platillo['nombre_menu'],
+          'nombreMenu' => $platillo['nombre'],
           'descripcion' => $platillo['descripcion'],
           'precio' => $platillo['precio'],
           'estado' => $platillo['estado'],
