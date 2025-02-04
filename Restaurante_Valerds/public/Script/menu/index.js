@@ -22,7 +22,7 @@ $(document).ready(function () {
            if ( last !== group ) {
                $(rows).eq( i ).before(
                  //formato de la fila de la categoria
-                   '<tr data-target=".'+group+'" style="cursor: pointer; background-color: #17a2b8;" class="select-none group text-center"><td colspan="5">'+
+                   '<tr data-target=".'+group+'" style="cursor: pointer; background-color: #9f50a2;" class="select-none group text-center"><td colspan="5">'+
                    '<a class="font-weight-bold text-white h4">'+ group + '</a>'
                    +'</td></tr>'
             );

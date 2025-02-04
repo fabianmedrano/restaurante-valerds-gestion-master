@@ -2,7 +2,7 @@ html {
 }
 
 body {
-  background-image: linear-gradient(to right, #78C9F1 0%, #EE96BF 130%);
+/*  background-image: linear-gradient(to right, #78C9F1 0%, #EE96BF 130%); */ 
   /*Padding y eliminacion del scroll que genera el Sweetalert2 */
   padding-right: 0 !important;
   overflow: auto !important;
@@ -47,7 +47,7 @@ footer p {
 }
 
 .f-info {
-  background-color: #942D97;
+  background-color:#17a2b8;;
   margin: 0;
   justify-content: center;
 }
@@ -86,6 +86,26 @@ footer p {
   padding: 5px;
 }
 
+ .btn-primary{
+  background-color: #944E97;
+  border-color: #944E97;
+}
+.btn-primary:hover{
+  background-color: #7f4481;
+  border-color: #7f4481;
+}
+
+.page-item.active .page-link{
+  background-color: #944E97;
+  border-color: #944E97;
+}
+
+i{
+    color: #944E97;
+}
+.swal2-popup .swal2-styled.swal2-confirm{
+  background-color: #944E97;
+}
 .icono {
   display: inline-block;
   height: auto;

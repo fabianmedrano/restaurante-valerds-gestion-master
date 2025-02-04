@@ -6,26 +6,24 @@ use App\Form\PedidosType;
 
 class DataPedidos {
 
-  public function obtenerPedidoMesa($entityManager,$mesa)
-  {
+  public function obtenerPedidoMesa($entityManager, $mesa)
+{
+    $sql = "SELECT * FROM pedidos WHERE numeroMesa = :mesa";
 
     try {
-      $sql = "SELECT * FROM mesa WHERE numeroMesa = :mesa";
-      $stmt = $entityManager->getConnection()->prepare($sql);
-      $stmt->bindParam(':mesa', $mesa);
-      $stmt->execute();
-      $result = $stmt->fetch();
-      $idpedido= $result['id_pedido'];
-      if ($idpedido) {
-       $stmt->closeCursor();
-       return $idpedido;
-     } else {
-       return null;
-     }
+        $stmt = $entityManager->getConnection()->prepare($sql);
+        $stmt->bindValue(':mesa', $mesa); 
+        $stmt->execute();
+
+        $result = $stmt->fetch();
+        return $result ? $result['id_pedido'] : null;
     } catch (\Exception $e) {
-      return false;
+        error_log($e->getMessage());
+        throw new \RuntimeException("An error occurred while fetching the pedido."); 
+    } finally {
+        $stmt->closeCursor(); 
     }
-  }
+}
 
 
 
@@ -56,8 +54,23 @@ class DataPedidos {
   public function obtenerListadoPlatillosPedido($entityManager, $idPedido) {
     try {
       $platillos = array();
-      $sql = "call sp_get_detalle_pedido(:idPedido);";
-
+      $sql = "SELECT
+            p.id_pedido,
+            mp.id_menu,
+            m.nombre,
+            m.precio,
+            mp.cantidad,
+            m.descripcion,
+            p.estado,
+            p.numeroMesa
+        FROM
+            menu_pedidos mp
+        INNER JOIN
+            pedidos p ON p.id_pedido = mp.id_pedido
+        INNER JOIN
+            menu m ON mp.id_menu = m.id_menu
+        WHERE
+            p.id_pedido = :id_pedido;";
       $stmt = $entityManager->getConnection()->prepare($sql);
       $stmt->bindParam(':idPedido', $idPedido);
       $stmt->execute();
@@ -142,12 +155,24 @@ class DataPedidos {
     try {
       $total = array();
 
-      $sql = "call sp_get_total_pedido(:idPedido);";
+      $sql = "SELECT
+            p.id_pedido,
+            SUM(m.precio * mp.cantidad) AS total_pedido
+        FROM
+            menu_pedidos mp
+        INNER JOIN
+            pedidos p ON p.id_pedido = mp.id_pedido
+        INNER JOIN
+            menu m ON mp.id_menu = m.id_menu
+        WHERE
+            p.id_pedido = :id_pedido  
+        GROUP BY
+            p.id_pedido;";
       $stmt = $entityManager->getConnection()->prepare($sql);
       $stmt->bindParam(':idPedido', $idPedido);
       $stmt->execute();
       $result = $stmt->fetch();
-      $total= $result['total'];
+      $total= $result['total_pedido'];
       if ($total !== false and  $total > 0 and  $total!== null ) {
         $stmt->closeCursor();
         return $total;

@@ -61,7 +61,8 @@ class PedidosController extends AbstractController
     {
       try {
         $menu = array();
-        $sql = "call sp_get_menu_completo();";
+        $sql = "SELECT menu.*  categorias.nombre as nombre_categoria FROM `menu` join categorias ON categorias.id_categoria = menu.id_categoria;";
+  
         $entityManager = $this->getDoctrine()->getManager();
         $stmt = $entityManager->getConnection()->prepare($sql);
         $stmt->execute();
@@ -146,19 +147,21 @@ class PedidosController extends AbstractController
     /**
      * @Route("/{mesa}/{cantidad}/viewtable", name="pedidos_showtable", methods={"GET","POST"})
      */
-    public function showtable(Request $request, $mesa,$cantidad ): Response
+    public function showtable(Request $request, $mesa, $cantidad): Response
     {
-      var_dump( $cantidad);
-      if($cantidad==1){
-
-          $dp = new DataPedidos();
-          $pedido = $dp->obtenerPedidoMesa($this->getDoctrine()->getManager(),$mesa);
-          return $this->redirectToRoute('pedidos_show',[ 'mesa'=>$mesa,'pedido' =>  $pedido]);
-
-      }else{
-
-        return $this->redirectToRoute('pedidos_tableorders_show',[ 'mesa' =>  $mesa]);
-      }
+        var_dump($cantidad);
+        if ($cantidad == 1) {
+            $dp = new DataPedidos();
+            $pedido = $dp->obtenerPedidoMesa($this->getDoctrine()->getManager(), $mesa);
+    
+            if (empty($pedido)) {
+                return $this->redirectToRoute('error_route'); 
+            }
+    
+            return $this->redirectToRoute('pedidos_show', ['mesa' => $mesa, 'pedido' => $pedido]);
+        } else {
+            return $this->redirectToRoute('pedidos_tableorders_show', ['mesa' => $mesa]);
+        }
     }
 
 
@@ -167,6 +170,12 @@ class PedidosController extends AbstractController
      */
     public function show(Request $request, $mesa, $pedido ): Response
     {
+
+      if (empty($pedido)) {
+
+        throw new \Exception("The pedido ID is empty.");
+    
+    }
         $dp = new DataPedidos();
 
         $pedidos = $dp->obtenerListadoPlatillosPedido($this->getDoctrine()->getManager(),$pedido);

@@ -10,23 +10,34 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-
+use Psr\Log\LoggerInterface;
 /**
  * @Route("/mesas")
  * @IsGranted("ROLE_ADMIN")
  */
 class MesasController extends AbstractController
 {
+
+  private $logger;
+
+
+
+
+  public function __construct(LoggerInterface $logger)  {
+    $this->logger = $logger;
+  }
   /**
    * @Route("/obtener_mesas", name="obtener_mesas", methods={"GET"})
    */
   public function obtenerMesas(): Response
   {
+
     try{
       $dm = new DataMesa();
       $numero =  $dm->obtenerNumeroMesa($this->getDoctrine()->getManager());
+      $this->logger->info('Este es un mensaje de log informativo.  '. empty( $numero));
 
-      if ($numero) {
+      if (! is_null(  $numero)) {
         return new Response($numero);
       } else {
         return (new Response())->setStatusCode(500);

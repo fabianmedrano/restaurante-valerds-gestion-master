@@ -8,7 +8,7 @@ use App\Form\MesaType;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 class DataMesa {
-
+ //NOTE: i still don't know how work this, it's count the register like a table, but register could have values  front 0 to 200, i don't know if that is de number of chairs  
   public function obtenerMesas($repositorio) {
 
     try {
@@ -26,7 +26,7 @@ public function obtenerMesasPedidosPendientes($entityManager){
 
   try {
     $mesas = array();
-    $sql = "SELECT numeroMesa  FROM pedidos where estado = 0 ;";
+    $sql = "SELECT numeroMesa ,id_pedido FROM pedidos where estado = 0 ;";
     $stmt = $entityManager->getConnection()->prepare($sql);
     $stmt->execute();
     $result = $stmt->fetchAll();
@@ -35,8 +35,8 @@ public function obtenerMesasPedidosPendientes($entityManager){
       foreach ($result as $mesa) {
        $mesas[] =
        array(
-        'mesa' => $mesa['mesa'],
-        'pedidos'=> $mesa['id_pedidos']
+        'mesa' => $mesa['numeroMesa'],
+        'pedidos'=> $mesa['id_pedido']
       );
      }
      $stmt->closeCursor();
@@ -72,14 +72,14 @@ public function obtenerMesa($entityManager,$idPedido) {
 
 public function obtenerNumeroMesa($entityManager) {
   try {
-    $sql = "select * from mesa;";
+    $sql = "select count(*) from mesa;";
     $stmt = $entityManager->getConnection()->prepare($sql);
     $stmt->execute();
     $result = $stmt->fetch();
-    $numeroMesa= $result['count(*)'];
-    $stmt->closeCursor();
-    if($numeroMesa){
-      return $numeroMesa;
+    $numeroMesa = $result;
+    $numeroMesa =(empty($numeroMesa))?0:$numeroMesa;
+    if($numeroMesa ) {
+      return $numeroMesa['count(*)'];
     }else{
       return false;
     }

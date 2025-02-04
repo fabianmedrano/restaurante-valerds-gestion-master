@@ -38,7 +38,7 @@ class UsuariosController extends AbstractController
     /**
      * @Route("/new", name="usuarios_new", methods={"GET","POST"})
      */
-   public function new(Request $request, \Swift_Mailer $mailer): Response
+   public function new(Request $request/*, \Swift_Mailer $mailer*/): Response
     {
       $dp = new DataPermisos();
       $permisos = $dp->obtenerPermisos($this->getDoctrine()->getManager());
@@ -55,7 +55,7 @@ class UsuariosController extends AbstractController
 
           if ($resultado == true) {
 
-            try {
+          /*  try {
               $message = (new \Swift_Message('Datos de cuenta'))
                 ->setFrom('alvaromontero45@gmail.com')
                 ->setTo($usuario->getCorreo())
@@ -71,7 +71,7 @@ class UsuariosController extends AbstractController
               //Para evitar enviar correos por accidente
               //$mailer->send($message);
             } catch (\Exception $e) {
-            }
+            }*/
             $this->addFlash(
               'alertaCompletado',
               'Registrado correctamente'
