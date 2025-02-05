@@ -171,11 +171,9 @@ class PedidosController extends AbstractController
     public function show(Request $request, $mesa, $pedido ): Response
     {
 
-      if (empty($pedido)) {
-
+      if (empty($pedido)) 
         throw new \Exception("The pedido ID is empty.");
     
-    }
         $dp = new DataPedidos();
 
         $pedidos = $dp->obtenerListadoPlatillosPedido($this->getDoctrine()->getManager(),$pedido);

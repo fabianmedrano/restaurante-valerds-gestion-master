@@ -53,52 +53,41 @@ class DataPedidos {
 
   public function obtenerListadoPlatillosPedido($entityManager, $idPedido) {
     try {
-      $platillos = array();
-      $sql = "SELECT
-            p.id_pedido,
-            mp.id_menu,
-            m.nombre,
-            m.precio,
-            mp.cantidad,
-            m.descripcion,
-            p.estado,
-            p.numeroMesa
-        FROM
-            menu_pedidos mp
-        INNER JOIN
-            pedidos p ON p.id_pedido = mp.id_pedido
-        INNER JOIN
-            menu m ON mp.id_menu = m.id_menu
-        WHERE
-            p.id_pedido = :id_pedido;";
-      $stmt = $entityManager->getConnection()->prepare($sql);
-      $stmt->bindParam(':idPedido', $idPedido);
-      $stmt->execute();
+        $platillos = array();
+        $sql = "SELECT p.id_pedido, mp.id_menu, m.nombre, m.precio, mp.cantidad, m.descripcion, p.estado, p.numeroMesa 
+                FROM menu_pedidos mp 
+                INNER JOIN pedidos p ON p.id_pedido = mp.id_pedido 
+                INNER JOIN menu m ON mp.id_menu = m.id_menu 
+                WHERE p.id_pedido = :id_pedido;";
 
-      $result = $stmt->fetchAll();
+        $stmt = $entityManager->getConnection()->prepare($sql);
+        $stmt->bindValue(':id_pedido', $idPedido); 
+        $stmt->execute();
 
-      if ($result) {
-        foreach ($result as $platillo) {
-         $platillos[] =
-         array(
-          'idPedido' => $platillo['id_pedido'],
-          'idMenu' => $platillo['id_menu'],
-          'nombre' => $platillo['nombre'],
-          'precio' => $platillo['precio'],
-          'descripcion' => $platillo['descripcion'],
-          'cantidad' => $platillo['cantidad'],
-        );
-       }
+        $result = $stmt->fetchAll();
 
-       $stmt->closeCursor();
-       return $platillos;
-      }else{
-       return null;
-      }
+        $stmt->closeCursor();
+        if ($result) {
+            foreach ($result as $platillo) {
+                $platillos[] = array(
+                    'idPedido' => $platillo['id_pedido'],
+                    'idMenu' => $platillo['id_menu'],
+                    'nombre' => $platillo['nombre'],
+                    'precio' => $platillo['precio'],
+                    'descripcion' => $platillo['descripcion'],
+                    'cantidad' => $platillo['cantidad'],
+                );
+            }
+
+            return $platillos;
+        } else {
+            return null;
+        }
     } catch (\Exception $e) {
-      return null;
+        error_log($e->getMessage());
+        return null;
     }
-  }
+}
 
   
   public function insertsubpedido($entityManager, $pedido, $mesa,$idUsuario ,$idPedidoAnterior/*$precio,$cantidad,*/ ) {
@@ -151,38 +140,31 @@ class DataPedidos {
 
 
   public function obtenerTotalPedido($entityManager, $idPedido) {
-
     try {
-      $total = array();
+        $sql = "SELECT p.id_pedido, SUM(m.precio * mp.cantidad) AS total_pedido 
+                FROM menu_pedidos mp 
+                INNER JOIN pedidos p ON p.id_pedido = mp.id_pedido 
+                INNER JOIN menu m ON mp.id_menu = m.id_menu 
+                WHERE p.id_pedido = :id_pedido 
+                GROUP BY p.id_pedido;";
 
-      $sql = "SELECT
-            p.id_pedido,
-            SUM(m.precio * mp.cantidad) AS total_pedido
-        FROM
-            menu_pedidos mp
-        INNER JOIN
-            pedidos p ON p.id_pedido = mp.id_pedido
-        INNER JOIN
-            menu m ON mp.id_menu = m.id_menu
-        WHERE
-            p.id_pedido = :id_pedido  
-        GROUP BY
-            p.id_pedido;";
-      $stmt = $entityManager->getConnection()->prepare($sql);
-      $stmt->bindParam(':idPedido', $idPedido);
-      $stmt->execute();
-      $result = $stmt->fetch();
-      $total= $result['total_pedido'];
-      if ($total !== false and  $total > 0 and  $total!== null ) {
+        $stmt = $entityManager->getConnection()->prepare($sql);
+        $stmt->bindValue(':id_pedido', $idPedido);
+        $stmt->execute();
+
+        $result = $stmt->fetch();
         $stmt->closeCursor();
-        return $total;
-      }else{
-        return null;
-      }
+        if ($result && isset($result['total_pedido'])) {
+            $total = $result['total_pedido'];
+            return $total > 0 ? $total : null; 
+        } else {
+            return null; 
+        }
     } catch (\Exception $e) {
-      return null;
+        error_log($e->getMessage());
+        return null; 
     }
-  }
+}
 
 
   public function obtenerListadoPedidosMesa($entityManager, $mesa) {
